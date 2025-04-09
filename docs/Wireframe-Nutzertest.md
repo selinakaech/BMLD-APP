@@ -17,7 +17,9 @@
  - passende Themenauswahl
 
 ### Wie bewerten wir den Test?
-- 
+- Was hat gut funktioniert?
+- Wo hat die Person gezögert?
+- Welche Funktionen wurden nicht genutzt?
 
 ## Nutzertest
 -
