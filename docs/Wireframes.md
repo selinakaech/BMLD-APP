@@ -1,5 +1,2 @@
-# Wireframe
-![Wireframe_V1](images/Wireframe_V1.jpeg)
-
-
-
+# **Wireframes**
+![Wireframe_V1](Images/Wireframe_V1.jpeg)
