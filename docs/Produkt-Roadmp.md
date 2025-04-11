@@ -5,12 +5,14 @@ Ziel: Grundgerüst der App steht
 - Erste Struktur und Navigation der Oberfläche
 - Platzhalter für künftige Tools
 - Technische Vorbereitung (z. B. Streamlit-Struktur, Seitenlayout)
+- Settings
 
 ## **V1.0 Calculator**
 Ziel: Funktionsfähige Rechentools als Kern der App
 - Rechenhilfen zu:
   - Molmasse, pH, Säure-Base, Konzentration
 - Periodensystem mit Grundinformationen inkl. Drop-Down-List
+- Quiz erstellen
 - Erste Beispielaufgaben zum Selbstrechnen
 
 ## **V2.0 +Datenspeicherung auf Switch Drive**
