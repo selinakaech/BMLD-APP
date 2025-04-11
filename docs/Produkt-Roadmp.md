@@ -9,15 +9,15 @@ Ziel: Grundgerüst der App steht
 ## **V1.0 Calculator**
 Ziel: Funktionsfähige Rechentools als Kern der App
 - Rechenhilfen zu:
- - Molmasse, pH, Säure-Base, Konzentration
+  - Molmasse, pH, Säure-Base, Konzentration
 - Periodensystem mit Grundinformationen inkl. Drop-Down-List
 - Erste Beispielaufgaben zum Selbstrechnen
 
 ## **V2.0 +Datenspeicherung auf Switch Drive**
 Ziel: Persönliche Daten & Fortschritt lokal speichern
 - Speicherung von:
- - Lernverlauf (bearbeitete Aufgaben, Rechenwege)
- - Lerntagebuch mit datierten Notizen
+  - Lernverlauf (bearbeitete Aufgaben, Rechenwege)
+  - Lerntagebuch mit datierten Notizen
 - Datenablage über Switch Drive
 - Möglichkeit zur späteren Synchronisation bei Login-Funktion
 - Einfache lokale Nutzerverwaltung (z. B. Nutzername eingeben)
