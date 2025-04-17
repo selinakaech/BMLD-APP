@@ -29,3 +29,10 @@ st.title('LabMate')
 
 name = st.session_state.get('name')
 st.markdown(f"✨ Hallo {name}! ✨")
+
+if page == "Startseite":
+    st.title("Herzlich Willkommen bei...")
+    st.text_input("Username")
+    st.text_input("Passwort", type="password")
+    if st.button("Login"):
+        st.success("Login erfolgreich (Demo-Zweck)")
