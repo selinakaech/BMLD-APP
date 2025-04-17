@@ -8,14 +8,6 @@ if "page" not in st.session_state:
 def switch_page(new_page):
     st.session_state.page = new_page
 
-# Seitenlogik
-if st.session_state.page == "Startseite":
-    st.title("Herzlich Willkommen bei...")
-    st.text_input("Username", key="user")
-    st.text_input("Passwort", type="password", key="pass")
-    if st.button("Login"):
-        switch_page("Hauptseite")
-
 elif st.session_state.page == "Hauptseite":
     st.title("Name der App")
     st.write("Willkommen! Wähle eine Funktion:")
