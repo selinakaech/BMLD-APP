@@ -1,3 +1,5 @@
+import streamlit as st
+
 # Periodensystem (Platzhalter)
 elif page == "Periodensystem":
     st.title("Periodensystem")

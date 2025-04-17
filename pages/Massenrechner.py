@@ -1,3 +1,5 @@
+import streamlit as st
+
 # Massenrechner
 elif page == "Massenrechner":
     st.title("Massenrechner")

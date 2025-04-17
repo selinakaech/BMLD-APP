@@ -1,3 +1,5 @@
+import streamlit as st
+
 # pH-Rechner
 elif page == "pH-Rechner":
     st.title("pH-Rechner")

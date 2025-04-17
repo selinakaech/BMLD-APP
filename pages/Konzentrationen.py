@@ -1,3 +1,4 @@
+import streamlit as st
 
 # Konzentration berechnen
 elif page == "Konzentration berechnen":

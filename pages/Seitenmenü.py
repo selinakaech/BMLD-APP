@@ -1,3 +1,5 @@
+import streamlit as st
+
 st.sidebar.title("Navigation")
 page = st.sidebar.radio("Gehe zu", [
     "Startseite", 

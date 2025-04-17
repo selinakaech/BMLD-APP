@@ -1,3 +1,5 @@
+import streamlit as st
+
 # Lösungen
 elif page == "Lösungen":
     st.title("Lösungen")
