@@ -1,10 +1,12 @@
 # ====== Start Login Block ======
 from utils.login_manager import LoginManager
-LoginManager().go_to_login('Start.py') 
-# ====== End Login Block ======
-
 import streamlit as st
 
+# Überprüfen, ob der Benutzer eingeloggt ist
+if "logged_in" not in st.session_state or not st.session_state.logged_in:
+    LoginManager().go_to_login('Start.py')
+    st.stop()  # Stoppt die Ausführung, bis der Benutzer eingeloggt ist
+# ====== End Login Block ======
 
 # Initialisierung
 if "page" not in st.session_state:
@@ -14,7 +16,8 @@ if "page" not in st.session_state:
 def switch_page(new_page):
     st.session_state.page = new_page
 
-elif st.session_state.page == "Hauptseite":
+# Hauptseite
+if st.session_state.page == "Hauptseite":  # Ändere 'elif' zu 'if'
     st.title("Name der App")
     st.write("Willkommen! Wähle eine Funktion:")
 
