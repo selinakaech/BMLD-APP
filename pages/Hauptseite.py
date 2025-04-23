@@ -28,4 +28,11 @@ pages = {
 # Navigation zwischen den Seiten mit Markdown-Links
 for page_name, page_file in pages.items():
     # Erstelle einen Markdown-Link für jede Seite
-    st.markdown(f"- [{page_name}](/{page_file})", unsafe_allow_html=True)
+    st.markdown(f"- [Konzentrationen](/Konzentrationen)", unsafe_allow_html=True)
+    st.markdown(f"- [Lösungen](/Lösungen)", unsafe_allow_html=True)
+    st.markdown(f"- [Massenrechner](/Massenrechner)", unsafe_allow_html=True)
+    st.markdown(f"- [Periodensystem](/Periodensystem)", unsafe_allow_html=True)
+    st.markdown(f"- [pH-Rechner](/pH-Rechner)", unsafe_allow_html=True)
+    st.markdown(f"- [Quiz](/Quiz)", unsafe_allow_html=True)
+    st.markdown(f"- [Säure-Base-Tabelle](/Säure-Base-Tabelle)", unsafe_allow_html=True)
+    st.markdown(f"- [Tagebuch](/Tagebuch)", unsafe_allow_html=True)
