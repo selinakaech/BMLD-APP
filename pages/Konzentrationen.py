@@ -1,11 +1,9 @@
 import streamlit as st
+from utils.login_manager import LoginManager
  
 def app():
-    if not st.session_state.logged_in:
-        st.warning("Du musst dich zuerst einloggen!")
-        return
+    LoginManager().go_to_login('Start.py')  # Jetzt wird das nur ausgeführt, wenn app() aufgerufen wird
  
-    # Berechnung der Konzentration
     st.title("Konzentration berechnen")
     n = st.number_input("Stoffmenge (mol)")
     V = st.number_input("Volumen (L)")
