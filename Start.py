@@ -21,13 +21,15 @@ data_manager.load_user_data(
     )
 # ====== End Init Block ======
 
-
 import streamlit as st
-import pandas as pd
-from utils.data_manager import DataManager
 
+# Set page configuration
+st.set_page_config(page_title="LabMate", layout="centered")
+
+# Main title
 st.title('LabMate')
 
+# Willkommenstext
 st.write("🔬 Willkommen in deiner persönlichen Chemie-Hilfe! 🧪")
 st.write("""
 Diese App ist dein vielseitiger Begleiter für chemische Aufgaben – egal ob in der Schule, im Studium oder beim Selbstlernen! 📚✨
@@ -47,5 +49,26 @@ Halte deine Gedanken, Erkenntnisse oder eigenen Erklärungen mit Datum fest – 
 Viel Spaß beim Entdecken und Lernen! 🚀
 """)
 
+# Entwicklerinformationen
 st.write("Diese App wurde von Soraya Gfrerer, Adriana Heeb und Selina Käch entwickelt.")
-st.write("E-Mail Adressen:gfrersor@students.zhaw.ch, heebadr1@students.zhaw.ch, kaechsel@students.zhaw.ch")
+st.write("E-Mail Adressen: gfrersor@students.zhaw.ch, heebadr1@students.zhaw.ch, kaechsel@students.zhaw.ch")
+
+# Seiten und ihre Namen
+pages = {
+    "Konzentrationen": "Konzentrationen",
+    "Lösungen": "Lösungen",
+    "Massenrechner": "Massenrechner",
+    "Periodensystem": "Periodensystem",
+    "pH-Rechner": "pH-Rechner",
+    "Quiz": "Quiz",
+    "Säure-Base-Tabelle": "Säure-Base-Tabelle",
+    "Tagebuch": "Tagebuch",
+}
+
+# Buttons für die Navigation
+st.markdown("### Wähle eine Seite aus:")
+for page_name, page_file in pages.items():
+    if st.button(page_name):
+        # Setze die Query-Parameter für die Navigation
+        st.experimental_set_query_params(page=page_file)
+        st.experimental_rerun()
