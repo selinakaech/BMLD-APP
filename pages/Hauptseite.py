@@ -32,17 +32,17 @@ st.markdown(
 # Buttons for page navigation
 st.markdown("### Wählen Sie eine Seite:")
 pages = {
-    "Konzentrationen": "Konzentrationen.py",
-    "Lösungen": "Lösungen.py",
-    "Massenrechner": "Massenrechner.py",
-    "Periodensystem": "Periodensystem.py",
-    "pH-Rechner": "pH-Rechner.py",
-    "Quiz": "Quiz.py",
-    "Säure-Base-Tabellen": "Säure-Base-Tabelle.py",
-    "Tagebuch": "Tagebuch.py",
+    "Konzentrationen": "Konzentrationen",
+    "Lösungen": "Lösungen",
+    "Massenrechner": "Massenrechner",
+    "Periodensystem": "Periodensystem",
+    "pH-Rechner": "pH-Rechner",
+    "Quiz": "Quiz",
+    "Säure-Base-Tabellen": "Säure-Base-Tabelle",
+    "Tagebuch": "Tagebuch",
 }
 
 for page_name, page_file in pages.items():
     if st.button(page_name):
         st.experimental_set_query_params(page=page_file)
-        st.experimental_rerun()
+        st.write(f"Navigieren zu {page_file}...")  # Debugging-Info
