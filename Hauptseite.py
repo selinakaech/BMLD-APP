@@ -1,4 +1,3 @@
-# ====== Start Login Block ======
 from utils.login_manager import LoginManager
 import streamlit as st
 
@@ -7,7 +6,6 @@ st.set_page_config(page_title="LabMate", layout="centered")
 
 # Login-Check
 LoginManager().go_to_login('Start.py')
-# ====== End Login Block ======
 
 # Main title
 st.markdown("<h1 style='text-align: center;'>Willkommen bei LabMate</h1>", unsafe_allow_html=True)
@@ -44,7 +42,7 @@ pages = {
 
 # Navigation zwischen den Seiten
 for page_name, page_file in pages.items():
-    if st.button(page_name):
-        # Navigiere zur entsprechenden Seite
-        st.write(f"Navigieren zu {page_file}...")  # Debugging-Info
-        st.query_params = {"page": page_file}  # Aktualisierte Methode
+    st.markdown(
+        f"[{page_name}](/{page_file})",
+        unsafe_allow_html=True,
+    )
