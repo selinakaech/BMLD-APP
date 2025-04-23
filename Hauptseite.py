@@ -10,23 +10,6 @@ LoginManager().go_to_login('Start.py')
 # Main title
 st.markdown("<h1 style='text-align: center;'>Willkommen bei LabMate</h1>", unsafe_allow_html=True)
 
-# Settings button (top-right)
-st.markdown(
-    """
-    <style>
-    .settings-button {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-    }
-    </style>
-    <a href='/settings' target='_self' class='settings-button'>
-        <button>⚙️ Einstellungen</button>
-    </a>
-    """,
-    unsafe_allow_html=True,
-)
-
 # Buttons for page navigation
 st.markdown("### Wählen Sie eine Seite:")
 pages = {
@@ -36,13 +19,13 @@ pages = {
     "Periodensystem": "Periodensystem",
     "pH-Rechner": "pH-Rechner",
     "Quiz": "Quiz",
-    "Säure-Base-Tabellen": "Säure-Base-Tabelle",
+    "Säure-Base-Tabelle": "Säure-Base-Tabelle",
     "Tagebuch": "Tagebuch",
 }
 
 # Navigation zwischen den Seiten
 for page_name, page_file in pages.items():
-    st.markdown(
-        f"[{page_name}](/{page_file})",
-        unsafe_allow_html=True,
-    )
+    if st.button(page_name):
+        # Navigiere zur entsprechenden Seite
+        st.experimental_set_query_params(page=page_file)
+        st.experimental_rerun()
