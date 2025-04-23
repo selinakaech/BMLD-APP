@@ -4,6 +4,10 @@
 import pandas as pd
 from utils.data_manager import DataManager
 from utils.login_manager import LoginManager
+import streamlit as st
+
+# Set page configuration (MUSS die erste Streamlit-Funktion sein)
+st.set_page_config(page_title="LabMate", layout="centered")
 
 # initialize the data manager
 data_manager = DataManager(fs_protocol='webdav', fs_root_folder="BMLD_Daten")  # switch drive 
@@ -20,11 +24,6 @@ data_manager.load_user_data(
     parse_dates=['timestamp']
 )
 # ====== End Init Block ======
-
-import streamlit as st
-
-# Set page configuration (MUSS die erste Streamlit-Funktion sein)
-st.set_page_config(page_title="LabMate", layout="centered")
 
 # Main title
 st.title('LabMate')
