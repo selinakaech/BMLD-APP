@@ -67,7 +67,7 @@ st.markdown("<hr>", unsafe_allow_html=True)
  
 # Seiten-Setup
 seiten = {
-    "🧪 Konzentrationen": "Konzentrationen",
+    "🧪 Konzentrationen": "Konzentrationen.py",
     "💧 Lösungen": "Lösungen",
     "⚖️ Massenrechner": "Massenrechner",
     "🔬 Periodensystem": "Periodensystem",
