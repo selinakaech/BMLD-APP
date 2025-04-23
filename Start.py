@@ -69,5 +69,4 @@ st.markdown("### Wähle eine Seite aus:")
 for page_name, page_file in pages.items():
     if st.button(page_name):
         # Setze die Query-Parameter für die Navigation
-        st.session_state["page"] = page_file  # Speichere die Seite im Session State
-        st.experimental_rerun()  # Lade die App neu
+        st.experimental_set_query_params(page=page_file)
