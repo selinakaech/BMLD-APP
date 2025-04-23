@@ -1,44 +1,41 @@
 # ====== Start Init Block ======
-# This needs to copied on top of the entry point of the app (Start.py)
- 
+# This needs to be copied on top of the entry point of the app (Start.py)
+
+import streamlit as st
 import pandas as pd
 from utils.data_manager import DataManager
 from utils.login_manager import LoginManager
- 
+import importlib
+
+# Set page configuration (MUSS die erste Streamlit-Funktion sein)
+st.set_page_config(page_title="Chemie Dashboard", layout="wide")
+
 # initialize the data manager
 data_manager = DataManager(fs_protocol='webdav', fs_root_folder="BMLD_Daten")  # switch drive
- 
+
 # initialize the login manager
 login_manager = LoginManager(data_manager)
 login_manager.login_register()  # open login/register page
- 
+
 # load the data from the persistent storage into the session state
 data_manager.load_user_data(
     session_state_key='data_df',
     file_name='data.csv',
-    initial_value = pd.DataFrame(),
-    parse_dates = ['timestamp']
-    )
+    initial_value=pd.DataFrame(),
+    parse_dates=['timestamp']
+)
 # ====== End Init Block ======
- 
- 
-import streamlit as st
-import pandas as pd
-from utils.data_manager import DataManager
-import importlib
- 
-st.set_page_config(page_title="Chemie Dashboard", layout="wide")
- 
+
 # --- Hintergrund mit modernem Glassmorphism ---
 st.markdown("""
 <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
- 
+
         .stApp {
             background: linear-gradient(135deg, #e0f7fa, #f1f2f6);
             font-family: 'Inter', sans-serif;
         }
- 
+
         .dashboard-card {
             background: rgba(255, 255, 255, 0.15);
             border-radius: 20px;
@@ -51,13 +48,13 @@ st.markdown("""
             transition: all 0.3s ease-in-out;
             margin-bottom: 25px;
         }
- 
+
         .dashboard-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 40px rgba(0, 255, 255, 0.4);
             border: 1px solid rgba(0, 255, 255, 0.5);
         }
- 
+
         .dashboard-button {
             background: linear-gradient(90deg, #2c3e50, #1abc9c);
             color: white;
@@ -69,27 +66,27 @@ st.markdown("""
             margin-top: 15px;
             transition: background 0.3s ease;
         }
- 
+
         .dashboard-button:hover {
             background: linear-gradient(90deg, #1abc9c, #16a085);
         }
- 
+
         .center-title {
             text-align: center;
             color: #2c3e50;
             font-weight: 700;
         }
- 
+
         h3 {
             color: #2c3e50;
             margin-bottom: 10px;
         }
 </style>
 """, unsafe_allow_html=True)
- 
+
 st.markdown("<h1 class='center-title'>🔬 Chemie-Tool Dashboard</h1>", unsafe_allow_html=True)
 st.markdown("<p class='center-title'>Wähle ein Tool aus und leg los!</p>", unsafe_allow_html=True)
- 
+
 # --- Einführungstext ---
 st.markdown("""
 <div style='text-align: center; padding: 1rem 2rem; font-size: 1.1rem;'>
@@ -112,9 +109,9 @@ Halte deine Gedanken, Erkenntnisse oder eigenen Erklärungen mit Datum fest – 
 Kontakt: gfrersor@students.zhaw.ch, heebadr1@students.zhaw.ch, kaechsel@students.zhaw.ch</em></p>
 </div>
 """, unsafe_allow_html=True)
- 
+
 st.markdown("<hr>", unsafe_allow_html=True)
- 
+
 # Seiten-Setup
 seiten = {
     "🧪 Konzentrationen": "konzentrationen",
@@ -126,10 +123,10 @@ seiten = {
     "📋 Säure-Base-Tabelle": "saeure_base_tabelle",
     "📓 Tagebuch": "tagebuch"
 }
- 
+
 if "seite" not in st.session_state:
     st.session_state.seite = None
- 
+
 # Layout mit Karten
 keys = list(seiten.keys())
 for i in range(0, len(keys), 2):
@@ -145,7 +142,7 @@ for i in range(0, len(keys), 2):
                     st.markdown("</div>", unsafe_allow_html=True)
                     if submitted:
                         st.session_state.seite = modul
- 
+
 # Ausgewählte Seite anzeigen
 if st.session_state.seite:
     modulname = f"pages.{st.session_state.seite}"
@@ -153,7 +150,7 @@ if st.session_state.seite:
         seite = importlib.import_module(modulname)
         st.success(f"✅ Modul '{modulname}' wurde geladen.")
         st.write(f"🔎 Hat app(): {hasattr(seite, 'app')}")
- 
+
         if hasattr(seite, "app"):
             seite.app()
         else:
