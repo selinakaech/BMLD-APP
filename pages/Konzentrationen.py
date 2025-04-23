@@ -1,13 +1,9 @@
-# ====== Start Login Block ======
-from utils.login_manager import LoginManager
-LoginManager().go_to_login('Start.py') 
-# ====== End Login Block ======
-
 import streamlit as st
-
-# Definiere die app()-Funktion
+from utils.login_manager import LoginManager
+ 
 def app():
-    # Konzentration berechnen
+    LoginManager().go_to_login('Start.py')  # Jetzt wird das nur ausgeführt, wenn app() aufgerufen wird
+ 
     st.title("Konzentration berechnen")
     n = st.number_input("Stoffmenge (mol)")
     V = st.number_input("Volumen (L)")
