@@ -47,4 +47,4 @@ for page_name, page_file in pages.items():
     if st.button(page_name):
         # Navigiere zur entsprechenden Seite
         st.write(f"Navigieren zu {page_file}...")  # Debugging-Info
-        st.experimental_set_query_params(page=page_file)  # Veraltet, aber hier für Kompatibilität
+        st.query_params = {"page": page_file}  # Aktualisierte Methode
