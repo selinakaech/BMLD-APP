@@ -3,38 +3,60 @@ import importlib
  
 st.set_page_config(page_title="Chemie Dashboard", layout="wide")
  
-# --- Style für die Karten ---
+# --- Hintergrund mit modernem Glassmorphism ---
 st.markdown("""
 <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
+ 
+        .stApp {
+            background: linear-gradient(135deg, #e0f7fa, #f1f2f6);
+            font-family: 'Inter', sans-serif;
+        }
+ 
         .dashboard-card {
-            background: linear-gradient(135deg, #74ebd5 0%, #9face6 100%);
-            padding: 25px;
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 20px;
+            padding: 25px;
             text-align: center;
-            box-shadow: 4px 4px 20px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+            transition: all 0.3s ease-in-out;
             margin-bottom: 25px;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
+ 
         .dashboard-card:hover {
-            transform: scale(1.03);
-            box-shadow: 6px 6px 25px rgba(0,0,0,0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 12px 40px rgba(0, 255, 255, 0.4);
+            border: 1px solid rgba(0, 255, 255, 0.5);
         }
+ 
         .dashboard-button {
-            background-color: #2c3e50;
+            background: linear-gradient(90deg, #2c3e50, #1abc9c);
             color: white;
             padding: 10px 25px;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 16px;
             cursor: pointer;
             margin-top: 15px;
+            transition: background 0.3s ease;
         }
+ 
         .dashboard-button:hover {
-            background-color: #1abc9c;
+            background: linear-gradient(90deg, #1abc9c, #16a085);
         }
+ 
         .center-title {
             text-align: center;
             color: #2c3e50;
+            font-weight: 700;
+        }
+ 
+        h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
         }
 </style>
 """, unsafe_allow_html=True)
