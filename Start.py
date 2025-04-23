@@ -1,5 +1,5 @@
 # ====== Start Init Block ======
-# This needs to copied on top of the entry point of the app (Start.py)
+# This needs to be copied on top of the entry point of the app (Start.py)
 
 import pandas as pd
 from utils.data_manager import DataManager
@@ -16,14 +16,14 @@ login_manager.login_register()  # open login/register page
 data_manager.load_user_data(
     session_state_key='data_df', 
     file_name='data.csv', 
-    initial_value = pd.DataFrame(), 
-    parse_dates = ['timestamp']
-    )
+    initial_value=pd.DataFrame(), 
+    parse_dates=['timestamp']
+)
 # ====== End Init Block ======
 
 import streamlit as st
 
-# Set page configuration
+# Set page configuration (MUSS die erste Streamlit-Funktion sein)
 st.set_page_config(page_title="LabMate", layout="centered")
 
 # Main title
