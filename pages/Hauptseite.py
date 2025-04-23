@@ -32,10 +32,14 @@ st.markdown(
 # Buttons for page navigation
 st.markdown("### Wählen Sie eine Seite:")
 pages = {
-    "Chemie": "chemie.py",
-    "Biologie": "biologie.py",
-    "Physik": "physik.py",
-    "Mathematik": "mathematik.py",
+    "Konzentrationen": "Konzentrationen.py",
+    "Lösungen": "Lösungen.py",
+    "Massenrechner": "Massenrechner.py",
+    "Periodensystem": "Periodensystem.py",
+    "pH-Rechner": "pH-Rechner.py",
+    "Quiz": "Quiz.py",
+    "Säure-Base-Tabellen": "Säure-Base-Tabelle.py",
+    "Tagebuch": "Tagebuch.py",
 }
 
 for page_name, page_file in pages.items():
