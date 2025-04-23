@@ -10,18 +10,6 @@ import importlib
 # Set page configuration (MUSS die erste Streamlit-Funktion sein)
 st.set_page_config(page_title="Chemie Dashboard", layout="wide", initial_sidebar_state="collapsed")
  
-# Versteckt die Sidebar und das Hamburger-Menü oben links
-st.markdown("""
-<style>
-        [data-testid="collapsedControl"] {
-            display: none;
-        }
-        section[data-testid="stSidebar"] {
-            display: none;
-        }
-</style>
-""", unsafe_allow_html=True)
- 
 # initialize the data manager
 data_manager = DataManager(fs_protocol='webdav', fs_root_folder="BMLD_Daten")  # switch drive
  
