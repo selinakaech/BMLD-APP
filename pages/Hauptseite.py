@@ -99,5 +99,14 @@ for i in range(0, len(keys), 2):
 # Ausgewählte Seite anzeigen
 if st.session_state.seite:
     modulname = f"pages.{st.session_state.seite}"
-    seite = importlib.import_module(modulname)
-    seite.app()
+    try:
+        seite = importlib.import_module(modulname)
+        st.success(f"✅ Modul '{modulname}' wurde geladen.")
+        st.write(f"🔎 Hat app(): {hasattr(seite, 'app')}")
+ 
+        if hasattr(seite, "app"):
+            seite.app()
+        else:
+            st.warning(f"❌ Die Seite '{modulname}' hat keine Funktion namens `app()`.")
+    except Exception as e:
+        st.error(f"💥 Fehler beim Laden von '{modulname}': {e}")
