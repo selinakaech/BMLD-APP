@@ -10,8 +10,10 @@ LoginManager().go_to_login('Start.py')
 # Main title
 st.markdown("<h1 style='text-align: center;'>Willkommen bei LabMate</h1>", unsafe_allow_html=True)
 
-# Buttons for page navigation
+# Seitenüberschrift
 st.markdown("### Wählen Sie eine Seite:")
+
+# Seiten und ihre Namen
 pages = {
     "Konzentrationen": "Konzentrationen",
     "Lösungen": "Lösungen",
@@ -23,9 +25,7 @@ pages = {
     "Tagebuch": "Tagebuch",
 }
 
-# Navigation zwischen den Seiten
+# Navigation zwischen den Seiten mit Markdown-Links
 for page_name, page_file in pages.items():
-    if st.button(page_name):
-        # Navigiere zur entsprechenden Seite
-        st.experimental_set_query_params(page=page_file)
-        st.experimental_rerun()
+    # Erstelle einen Markdown-Link für jede Seite
+    st.markdown(f"- [{page_name}](/{page_file})", unsafe_allow_html=True)
