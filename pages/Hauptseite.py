@@ -67,14 +67,14 @@ st.markdown("<hr>", unsafe_allow_html=True)
  
 # Seiten-Setup
 seiten = {
-    "🧪 Konzentrationen": "Konzentrationen",
-    "💧 Lösungen": "Lösungen",
-    "⚖️ Massenrechner": "Massenrechner",
-    "🔬 Periodensystem": "Periodensystem",
-    "🧫 pH-Rechner": "pH-Rechner",
-    "🧠 Quiz": "Quiz",
-    "📋 Säure-Base-Tabelle": "Säure-Base-Tabelle",
-    "📓 Tagebuch": "Tagebuch"
+    "🧪 Konzentrationen": "konzentrationen",
+    "💧 Lösungen": "loesungen",
+    "⚖️ Massenrechner": "massenrechner",
+    "🔬 Periodensystem": "periodensystem",
+    "🧫 pH-Rechner": "ph_rechner",
+    "🧠 Quiz": "quiz",
+    "📋 Säure-Base-Tabelle": "saeure_base_tabelle",
+    "📓 Tagebuch": "tagebuch"
 }
  
 if "seite" not in st.session_state:
