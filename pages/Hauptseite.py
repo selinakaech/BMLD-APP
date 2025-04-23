@@ -42,7 +42,9 @@ pages = {
     "Tagebuch": "Tagebuch",
 }
 
+# Navigation zwischen den Seiten
 for page_name, page_file in pages.items():
     if st.button(page_name):
-        st.experimental_set_query_params(page=page_file)
+        # Navigiere zur entsprechenden Seite
         st.write(f"Navigieren zu {page_file}...")  # Debugging-Info
+        st.experimental_set_query_params(page=page_file)  # Veraltet, aber hier für Kompatibilität
