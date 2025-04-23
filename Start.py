@@ -1,22 +1,50 @@
 # ====== Start Init Block ======
 # This needs to be copied on top of the entry point of the app (Start.py)
-
+ 
 import streamlit as st
 import pandas as pd
 from utils.data_manager import DataManager
 from utils.login_manager import LoginManager
 import importlib
-
+ 
 # Set page configuration (MUSS die erste Streamlit-Funktion sein)
-st.set_page_config(page_title="Chemie Dashboard", layout="wide")
-
+st.set_page_config(page_title="Chemie Dashboard", layout="wide", initial_sidebar_state="collapsed")
+ 
+# Verstecke Sidebar & Hamburger-Menü vollständig
+st.markdown("""
+<style>
+        [data-testid="collapsedControl"] {
+            display: none;
+        }
+        section[data-testid="stSidebar"] {
+            display: none;
+        }
+ 
+        .stApp {
+            background-image: url("data:image/svg+xml;utf8,
+<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'>
+<text x='10' y='40' font-size='26' fill='rgba(0,0,0,0.04)' font-family='monospace'>:Cl:</text>
+<text x='80' y='30' font-size='26' fill='rgba(0,0,0,0.04)' font-family='monospace'>H:</text>
+<text x='140' y='50' font-size='26' fill='rgba(0,0,0,0.04)' font-family='monospace'>•</text>
+<text x='60' y='120' font-size='30' fill='rgba(0,0,0,0.035)' font-family='monospace'>⚗️</text>
+<text x='110' y='160' font-size='30' fill='rgba(0,0,0,0.035)' font-family='monospace'>🧪</text>
+<text x='10' y='190' font-size='26' fill='rgba(0,0,0,0.04)' font-family='monospace'>/\\</text>
+<text x='150' y='190' font-size='20' fill='rgba(0,0,0,0.04)' font-family='monospace'>e⁻</text>
+</svg>");
+            background-repeat: repeat;
+            background-size: 200px;
+            font-family: 'Inter', sans-serif;
+        }
+</style>
+""", unsafe_allow_html=True)
+ 
 # initialize the data manager
-data_manager = DataManager(fs_protocol='webdav', fs_root_folder="BMLD_Daten")  # switch drive
-
+data_manager = DataManager(fs_protocol='webdav', fs_root_folder="BMLD_Daten")
+ 
 # initialize the login manager
 login_manager = LoginManager(data_manager)
-login_manager.login_register()  # open login/register page
-
+login_manager.login_register()
+ 
 # load the data from the persistent storage into the session state
 data_manager.load_user_data(
     session_state_key='data_df',
@@ -25,68 +53,11 @@ data_manager.load_user_data(
     parse_dates=['timestamp']
 )
 # ====== End Init Block ======
-
-# --- Hintergrund mit modernem Glassmorphism ---
-st.markdown("""
-<style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap');
-
-        .stApp {
-            background: linear-gradient(135deg, #e0f7fa, #f1f2f6);
-            font-family: 'Inter', sans-serif;
-        }
-
-        .dashboard-card {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 25px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
-            transition: all 0.3s ease-in-out;
-            margin-bottom: 25px;
-        }
-
-        .dashboard-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 40px rgba(0, 255, 255, 0.4);
-            border: 1px solid rgba(0, 255, 255, 0.5);
-        }
-
-        .dashboard-button {
-            background: linear-gradient(90deg, #2c3e50, #1abc9c);
-            color: white;
-            padding: 10px 25px;
-            border: none;
-            border-radius: 12px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: background 0.3s ease;
-        }
-
-        .dashboard-button:hover {
-            background: linear-gradient(90deg, #1abc9c, #16a085);
-        }
-
-        .center-title {
-            text-align: center;
-            color: #2c3e50;
-            font-weight: 700;
-        }
-
-        h3 {
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-</style>
-""", unsafe_allow_html=True)
-
+ 
+# --- Dashboard Inhalt ---
 st.markdown("<h1 class='center-title'>🔬 Chemie-Tool Dashboard</h1>", unsafe_allow_html=True)
 st.markdown("<p class='center-title'>Wähle ein Tool aus und leg los!</p>", unsafe_allow_html=True)
-
+ 
 # --- Einführungstext ---
 st.markdown("""
 <div style='text-align: center; padding: 1rem 2rem; font-size: 1.1rem;'>
@@ -105,13 +76,13 @@ Nutze die integrierte Lernkontrolle, um jederzeit zu sehen, wie weit du schon ge
 <p>📝 <strong>Lerntagebuch inklusive!</strong><br>
 Halte deine Gedanken, Erkenntnisse oder eigenen Erklärungen mit Datum fest – perfekt zum Nachschlagen oder als persönliches Lernarchiv! 💡🗓️</p>
 <p>Viel Spaß beim Entdecken und Lernen! 🚀</p>
-<p style="font-size: 0.9rem; color: gray;"><em>Diese App wurde von Soraya Gfrerer, Adriana Heeb und Selina Käch entwickelt.<br>
+<p style="font-size: 0.9rem; color: gray;'><em>Diese App wurde von Soraya Gfrerer, Adriana Heeb und Selina Käch entwickelt.<br>
 Kontakt: gfrersor@students.zhaw.ch, heebadr1@students.zhaw.ch, kaechsel@students.zhaw.ch</em></p>
 </div>
 """, unsafe_allow_html=True)
-
+ 
 st.markdown("<hr>", unsafe_allow_html=True)
-
+ 
 # Seiten-Setup
 seiten = {
     "🧪 Konzentrationen": "konzentrationen",
@@ -123,10 +94,10 @@ seiten = {
     "📋 Säure-Base-Tabelle": "saeure_base_tabelle",
     "📓 Tagebuch": "tagebuch"
 }
-
+ 
 if "seite" not in st.session_state:
     st.session_state.seite = None
-
+ 
 # Layout mit Karten
 keys = list(seiten.keys())
 for i in range(0, len(keys), 2):
@@ -142,7 +113,7 @@ for i in range(0, len(keys), 2):
                     st.markdown("</div>", unsafe_allow_html=True)
                     if submitted:
                         st.session_state.seite = modul
-
+ 
 # Ausgewählte Seite anzeigen
 if st.session_state.seite:
     modulname = f"pages.{st.session_state.seite}"
@@ -150,7 +121,6 @@ if st.session_state.seite:
         seite = importlib.import_module(modulname)
         st.success(f"✅ Modul '{modulname}' wurde geladen.")
         st.write(f"🔎 Hat app(): {hasattr(seite, 'app')}")
-
         if hasattr(seite, "app"):
             seite.app()
         else:
