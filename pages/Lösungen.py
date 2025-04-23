@@ -3,9 +3,10 @@ from utils.login_manager import LoginManager
 LoginManager().go_to_login('Start.py') 
 # ====== End Login Block ======
 
-
 import streamlit as st
 
-# Lösungen
-st.title("Lösungen")
-st.line_chart([1, 3, 2, 4, 7, 5])  # Beispielhafte Fortschrittsgrafik
+# Definiere die app()-Funktion
+def app():
+    # Lösungen
+    st.title("Lösungen")
+    st.line_chart([1, 3, 2, 4, 7, 5])  # Beispielhafte Fortschrittsgrafik

@@ -7,9 +7,11 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 
-# Säure-Base-Tabelle
-st.title("Säure-Base-Tabelle")
-saure = st.text_input("Geben Sie eine Säure ein")
-base = st.text_input("Geben Sie eine Base ein")
-if saure or base:
-    st.write(f"pKs-Wert (Demo): 4.75")
+# Definiere die app()-Funktion
+def app():
+    # Säure-Base-Tabelle
+    st.title("Säure-Base-Tabelle")
+    saure = st.text_input("Geben Sie eine Säure ein")
+    base = st.text_input("Geben Sie eine Base ein")
+    if saure or base:
+        st.write(f"pKs-Wert (Demo): 4.75")
