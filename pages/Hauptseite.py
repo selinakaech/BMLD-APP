@@ -1,11 +1,13 @@
 # ====== Start Login Block ======
 from utils.login_manager import LoginManager
 import streamlit as st
-LoginManager().go_to_login('Start.py') 
-# ====== End Login Block ======
 
-# Set page configuration
+# Set page configuration (MUSS die erste Streamlit-Funktion sein)
 st.set_page_config(page_title="LabMate", layout="centered")
+
+# Login-Check
+LoginManager().go_to_login('Start.py')
+# ====== End Login Block ======
 
 # Main title
 st.markdown("<h1 style='text-align: center;'>Willkommen bei LabMate</h1>", unsafe_allow_html=True)
