@@ -23,6 +23,7 @@ Ziel: Funktionsfähige Rechentools als Kern der App
 ## **V2.0 + Datenspeicherung auf Switch Drive**
 Ziel: Persönliche Daten & Fortschritt lokal speichern
 - Layout Start-/Hauptseite
+- Button Settings inkl. Settings
 - Quiz erstellen mit 10 Beispielfragen bei welcher eine abgefragt werden
 - Speicherung von:
   - Lernverlauf (bearbeitete Aufgaben, Rechenwege)
