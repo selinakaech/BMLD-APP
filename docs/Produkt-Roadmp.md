@@ -11,7 +11,8 @@ Ziel: Grundgerüst der App steht
 
 ## **V1.0 Calculator + User Login & Multi-User**
 Ziel: Funktionsfähige Rechentools als Kern der App
-- Gestaltung Start-/Hauptseite
+- Login-System (z. B. via E-Mail, Passwort oder edu-Login)
+- Multi-User-Unterstützung (mehrere Nutzer auf einem Gerät oder online)Gestaltung Start-/Hauptseite
 - Grundstruktur pages
 - Rechenhilfen zu:
   - Molmasse, pH, Säure-Base, Konzentration
@@ -34,8 +35,6 @@ Ziel: Persönliche Daten & Fortschritt lokal speichern
 
 ## **V3.0
 Ziel: Mehrere Nutzerprofile & zentraler Zugriff
-- Login-System (z. B. via E-Mail, Passwort oder edu-Login)
-- Multi-User-Unterstützung (mehrere Nutzer auf einem Gerät oder online)
 - Personalisierter Fortschritt & individuelles Lerntagebuch
 - Optionale Cloud-Speicherung (z. B. persönliche Drive-Ordner)
 
