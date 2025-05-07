@@ -33,13 +33,12 @@ def app():
             </div>
             """, unsafe_allow_html=True)
     else:
-        st.info("Noch keine Einträge vorhanden. Klicke unten rechts auf das Plus, um einen neuen Eintrag zu erstellen.")
+        st.info("Noch keine Einträge vorhanden. Schreibe unten einen neuen Eintrag, um zu beginnen.")
 
-    # Button zum Hinzufügen eines neuen Eintrags
-    with st.sidebar:
-        st.subheader("➕ Neuer Eintrag")
-        new_entry = st.text_area("Schreibe hier deinen neuen Eintrag:")
-        if st.button("Speichern"):
-            add_entry(new_entry)
-            st.success("Eintrag gespeichert!")
-            st.experimental_rerun()  # Seite neu laden, um den neuen Eintrag anzuzeigen
+    # Bereich zum Hinzufügen eines neuen Eintrags
+    st.subheader("➕ Neuer Eintrag")
+    new_entry = st.text_area("Schreibe hier deinen neuen Eintrag:")
+    if st.button("Speichern"):
+        add_entry(new_entry)
+        st.success("Eintrag gespeichert!")
+        st.experimental_rerun()  # Seite neu laden, um den neuen Eintrag anzuzeigen
