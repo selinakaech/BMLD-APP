@@ -1,44 +1,53 @@
-import streamlit as st
+import tkinter as tk
+from tkinter import simpledialog
 from datetime import datetime
 
-# Funktion zum Initialisieren des Tagebuchs im Session State
-def initialize_tagebuch():
-    if "tagebuch" not in st.session_state:
-        st.session_state.tagebuch = []  # Liste für die Notizen
+class TagebuchApp:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("Tagebuch")
+        
+        # Textfeld für die Anzeige der Einträge
+        self.text_area = tk.Text(root, wrap=tk.WORD, state=tk.DISABLED, width=50, height=20)
+        self.text_area.pack(pady=10)
+        
+        # Button für neuen Eintrag
+        self.new_entry_button = tk.Button(root, text="+ Neuer Eintrag", command=self.neuer_eintrag)
+        self.new_entry_button.pack(pady=5)
+        
+        # Lade bestehende Einträge
+        self.load_entries()
 
-# Funktion zum Hinzufügen eines neuen Eintrags
-def add_entry(entry_text):
-    if entry_text.strip():  # Nur speichern, wenn der Text nicht leer ist
-        st.session_state.tagebuch.append({
-            "datum": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-            "text": entry_text.strip()
-        })
+    def neuer_eintrag(self):
+        # Dialog für neuen Eintrag
+        neuer_text = simpledialog.askstring("Neuer Eintrag", "Schreibe deinen Eintrag:")
+        if neuer_text:
+            # Zeitstempel hinzufügen
+            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+            eintrag = f"{timestamp}\n{neuer_text}\n\n"
+            
+            # Speichere den Eintrag in der Datei
+            with open("tagebuch.txt", "a", encoding="utf-8") as file:
+                file.write(eintrag)
+            
+            # Zeige den Eintrag in der Textbox
+            self.text_area.config(state=tk.NORMAL)
+            self.text_area.insert(tk.END, eintrag)
+            self.text_area.config(state=tk.DISABLED)
 
-# Funktion zum Rendern der Tagebuch-Seite
-def app():
-    st.title("📓 Tagebuch")
-    st.write("Hier kannst du deine Gedanken, Erkenntnisse oder Notizen festhalten.")
+    def load_entries(self):
+        try:
+            # Lade bestehende Einträge aus der Datei
+            with open("tagebuch.txt", "r", encoding="utf-8") as file:
+                eintraege = file.read()
+                self.text_area.config(state=tk.NORMAL)
+                self.text_area.insert(tk.END, eintraege)
+                self.text_area.config(state=tk.DISABLED)
+        except FileNotFoundError:
+            # Falls die Datei nicht existiert, nichts tun
+            pass
 
-    # Initialisiere das Tagebuch
-    initialize_tagebuch()
-
-    # Zeige bestehende Einträge
-    st.subheader("Bisherige Einträge")
-    if st.session_state.tagebuch:
-        for entry in reversed(st.session_state.tagebuch):  # Neueste Einträge zuerst
-            st.markdown(f"""
-            <div style="border: 1px solid #ddd; border-radius: 8px; padding: 10px; margin-bottom: 10px; background-color: #f9f9f9;">
-                <strong>{entry['datum']}</strong>
-                <p>{entry['text']}</p>
-            </div>
-            """, unsafe_allow_html=True)
-    else:
-        st.info("Noch keine Einträge vorhanden. Schreibe unten einen neuen Eintrag, um zu beginnen.")
-
-    # Bereich zum Hinzufügen eines neuen Eintrags
-    st.subheader("➕ Neuer Eintrag")
-    new_entry = st.text_area("Schreibe hier deinen neuen Eintrag:")
-    if st.button("Speichern"):
-        add_entry(new_entry)
-        st.success("Eintrag gespeichert!")
-        st.experimental_rerun()  # Seite neu laden, um den neuen Eintrag anzuzeigen
+if __name__ == "__main__":
+    root = tk.Tk()
+    app = TagebuchApp(root)
+    root.mainloop()
