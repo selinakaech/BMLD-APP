@@ -34,6 +34,9 @@ def app():
             st.success("Eintrag wurde gespeichert!")
             
             # Seite neu laden durch Manipulation von st.session_state
-            st.session_state["reload"] = not st.session_state.get("reload", False)
+            if "reload" not in st.session_state:
+                st.session_state["reload"] = True
+            else:
+                st.session_state["reload"] = not st.session_state["reload"]
         else:
             st.warning("Der Eintrag darf nicht leer sein.")
