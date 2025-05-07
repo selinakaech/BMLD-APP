@@ -105,26 +105,24 @@ data_manager.load_user_data(
 )
 # ====== End Init Block ======
  
-# Titel und Einleitung
-st.markdown("<h1 class='center-title'>🔬 Chemie-Tool Dashboard</h1>", unsafe_allow_html=True)
-st.markdown("<p class='center-title'>Wähle ein Tool aus und leg los!</p>", unsafe_allow_html=True)
- 
+# --- Einführungstext ---
 st.markdown("""
-<div style='text-align: center; padding: 1rem 2rem; font-size: 1.1rem; background-color: #ffffffaa; border-radius: 1rem; max-width: 900px; margin: 0 auto 2rem auto;'>
+<div style='text-align: center; padding: 1rem 2rem; font-size: 1.1rem;'>
 <h2>LabMate</h2>
 <p>🔬 Willkommen in deiner persönlichen Chemie-Hilfe! 🧪<br>
 Diese App ist dein vielseitiger Begleiter für chemische Aufgaben – egal ob in der Schule, im Studium oder beim Selbstlernen! 📚✨</p>
 <p><strong>Hier findest du hilfreiche Tools wie:</strong></p>
 <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
-<li>Rechenhilfen (z. B. pH-Wert, Konzentrationen)</li>
-<li>Ein interaktives Periodensystem</li>
-<li>Unterstützung beim Umstellen von Formeln</li>
-<li>Und vieles mehr!</li>
+<li>🔹 Rechenhilfen (z. B. pH-Wert, Konzentrationen)</li>
+<li>🔹 Ein interaktives Periodensystem</li>
+<li>🔹 Unterstützung beim Umstellen von Formeln</li>
+<li>🔹 Und vieles mehr!</li>
 </ul>
 <p>📈 <strong>Behalte deinen Fortschritt im Blick!</strong><br>
 Nutze die integrierte Lernkontrolle, um jederzeit zu sehen, wie weit du schon gekommen bist und woran du noch arbeiten möchtest.</p>
 <p>📝 <strong>Lerntagebuch inklusive!</strong><br>
 Halte deine Gedanken, Erkenntnisse oder eigenen Erklärungen mit Datum fest – perfekt zum Nachschlagen oder als persönliches Lernarchiv! 💡🗓️</p>
+<p>Viel Spaß beim Entdecken und Lernen! 🚀</p>
 <p style="font-size: 0.9rem; color: gray;'><em>Diese App wurde von Soraya Gfrerer, Adriana Heeb und Selina Käch entwickelt.<br>
 Kontakt: gfrersor@students.zhaw.ch, heebadr1@students.zhaw.ch, kaechsel@students.zhaw.ch</em></p>
 </div>
