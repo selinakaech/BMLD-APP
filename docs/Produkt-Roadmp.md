@@ -9,16 +9,22 @@ Ziel: Grundgerüst der App steht
 
 - Zeitaufwand: 2 - 3 Stunden
 
-## **V1.0 Calculator**
+## **V1.0 Calculator + User Login & Multi-User**
 Ziel: Funktionsfähige Rechentools als Kern der App
+- Login-System (z. B. via E-Mail, Passwort oder edu-Login)
+- Multi-User-Unterstützung (mehrere Nutzer auf einem Gerät oder online)
+- Gestaltung Start-/Hauptseite
+- Grundstruktur pages
 - Rechenhilfen zu:
   - Molmasse, pH, Säure-Base, Konzentration
 - Periodensystem mit Grundinformationen inkl. Drop-Down-List
 
 - Zeitaufwand: 6 - 8 Stunden
 
-## **V2.0 +Datenspeicherung auf Switch Drive**
+## **V2.0 + Datenspeicherung auf Switch Drive**
 Ziel: Persönliche Daten & Fortschritt lokal speichern
+- Layout Start-/Hauptseite
+- Button Settings inkl. Settings
 - Quiz erstellen mit 10 Beispielfragen bei welcher eine abgefragt werden
 - Speicherung von:
   - Lernverlauf (bearbeitete Aufgaben, Rechenwege)
@@ -29,10 +35,8 @@ Ziel: Persönliche Daten & Fortschritt lokal speichern
 
 - Zeitaufwand: 4 - 5 Stunden
 
-## **V3.0 +User Login & Multi-User**
+## **V3.0
 Ziel: Mehrere Nutzerprofile & zentraler Zugriff
-- Login-System (z. B. via E-Mail, Passwort oder edu-Login)
-- Multi-User-Unterstützung (mehrere Nutzer auf einem Gerät oder online)
 - Personalisierter Fortschritt & individuelles Lerntagebuch
 - Optionale Cloud-Speicherung (z. B. persönliche Drive-Ordner)
 
