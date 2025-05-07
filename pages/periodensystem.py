@@ -1,54 +1,34 @@
 import streamlit as st
+import json
 
-# Datenbank der Elementeigenschaften
-ELEMENT_DATA = {
-    "H": {
-        "name": "Wasserstoff",
-        "molmasse": 1.008,
-        "elektronegativität": 2.20,
-        "aggregatzustand": "gasförmig",
-        "dichte": 0.00008988,  # g/cm³
-        "ordnungszahl": 1,
-        "bild": "https://upload.wikimedia.org/wikipedia/commons/8/80/Hydrogen_Spectra.jpg"
-    },
-    "O": {
-        "name": "Sauerstoff",
-        "molmasse": 15.999,
-        "elektronegativität": 3.44,
-        "aggregatzustand": "gasförmig",
-        "dichte": 0.001429,  # g/cm³
-        "ordnungszahl": 8,
-        "bild": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Oxygen_discharge_tube.jpg"
-    },
-    "Fe": {
-        "name": "Eisen",
-        "molmasse": 55.845,
-        "elektronegativität": 1.83,
-        "aggregatzustand": "fest",
-        "dichte": 7.874,  # g/cm³
-        "ordnungszahl": 26,
-        "bild": "https://upload.wikimedia.org/wikipedia/commons/e/e7/Iron_electrolytic_and_1cm3_cube.jpg"
-    },
-    # Weitere Elemente können hier hinzugefügt werden...
-}
+@st.cache_data
+def load_elements():
+    with open("PeriodicTableJSON.json", "r", encoding="utf-8") as file:
+        data = json.load(file)
+    return {el["symbol"]: el for el in data["elements"]}
 
-# Definiere die app()-Funktion
 def app():
-    # Periodensystem
-    st.title("Periodensystem")
-    st.write("Geben Sie ein Elementsymbol ein (z. B. H, O, Fe):")
-    element = st.text_input("Element").capitalize()
+    elements = load_elements()
 
-    if element in ELEMENT_DATA:
-        data = ELEMENT_DATA[element]
-        st.subheader(f"Informationen zu {data['name']} ({element})")
-        st.write(f"**Molmasse:** {data['molmasse']} g/mol")
-        st.write(f"**Elektronegativität:** {data['elektronegativität']}")
-        st.write(f"**Aggregatzustand:** {data['aggregatzustand']}")
-        st.write(f"**Dichte:** {data['dichte']} g/cm³")
-        st.write(f"**Ordnungszahl:** {data['ordnungszahl']}")
-        st.image(data["bild"], caption=f"{data['name']} ({element})", use_container_width=True)
-    elif element:
-        st.error("Das eingegebene Element wurde nicht gefunden. Bitte überprüfen Sie das Symbol.")
+    st.title("Periodensystem der Elemente")
+    st.write("Geben Sie ein Elementsymbol ein (z. B. H, O, Fe):")
+    symbol = st.text_input("Element").capitalize()
+
+    if symbol in elements:
+        el = elements[symbol]
+        st.subheader(f"{el['name']} ({symbol})")
+        st.write(f"**Ordnungszahl:** {el['number']}")
+        st.write(f"**Molmasse:** {el['atomic_mass']} u")
+        st.write(f"**Elektronegativität:** {el.get('electronegativity_pauling', 'nicht verfügbar')}")
+        st.write(f"**Aggregatzustand:** {el.get('phase', 'unbekannt')}")
+        st.write(f"**Dichte:** {el.get('density', 'unbekannt')} g/cm³")
+        st.write(f"**Kategorie:** {el.get('category', 'nicht angegeben')}")
+        st.write(f"**Aussehen:** {el.get('appearance', 'nicht angegeben')}")
+        wiki_url = el.get("source", "")
+        if wiki_url:
+            st.markdown(f"[Weitere Informationen bei Wikipedia]({wiki_url})")
+    elif symbol:
+        st.error("Element nicht gefunden. Bitte überprüfen Sie das Symbol.")
     else:
-        st.info("Bitte geben Sie ein Elementsymbol ein, um Informationen anzuzeigen.")
+        st.info("Bitte geben Sie ein Elementsymbol ein.")
+
