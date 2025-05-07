@@ -4,9 +4,10 @@ import os
 
 @st.cache_data
 def load_elements():
-    # Dynamischer Pfad zur JSON-Datei
-    base_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(base_dir, "PeriodicTableJSON.json")
+    # Dynamischer Pfad zur JSON-Datei im Ordner "script"
+    base_dir = os.path.dirname(os.path.abspath(__file__))  # Verzeichnis der aktuellen Datei
+    script_dir = os.path.join(base_dir, "..", "script")  # Gehe in den Ordner "script"
+    file_path = os.path.join(script_dir, "PeriodicTableJSON.json")
     
     # Datei öffnen und Daten laden
     with open(file_path, "r", encoding="utf-8") as file:
