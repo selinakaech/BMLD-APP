@@ -27,6 +27,13 @@ def app():
         st.write(f"**Dichte:** {el.get('density', 'unbekannt')} g/cm³")
         st.write(f"**Kategorie:** {el.get('category', 'nicht angegeben')}")
         st.write(f"**Aussehen:** {el.get('appearance', 'nicht angegeben')}")
+
+        # Bild anzeigen, falls verfügbar
+        image_url = el.get("image", None)  # Erwarte ein "image"-Feld in der JSON-Datei
+        if image_url:
+            st.image(image_url, caption=f"Bild von {el['name']}", use_column_width=True)
+
+        # Wikipedia-Link anzeigen
         wiki_url = el.get("source", "")
         if wiki_url:
             st.markdown(f"[Weitere Informationen bei Wikipedia]({wiki_url})")
