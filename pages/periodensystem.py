@@ -1,9 +1,12 @@
 import streamlit as st
 import json
+import os
 
 @st.cache_data
 def load_elements():
-    with open("PeriodicTableJSON.json", "r", encoding="utf-8") as file:
+    # Dynamischer Pfad zur JSON-Datei
+    file_path = os.path.join(os.path.dirname(__file__), "../PeriodicTableJSON.json")
+    with open(file_path, "r", encoding="utf-8") as file:
         data = json.load(file)
     return {el["symbol"]: el for el in data["elements"]}
 
@@ -31,4 +34,3 @@ def app():
         st.error("Element nicht gefunden. Bitte überprüfen Sie das Symbol.")
     else:
         st.info("Bitte geben Sie ein Elementsymbol ein.")
-
