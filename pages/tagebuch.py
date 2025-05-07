@@ -32,6 +32,8 @@ def app():
             entry = f"{timestamp}\n{new_entry.strip()}\n\n"
             save_entry(entry)
             st.success("Eintrag wurde gespeichert!")
-            st.experimental_rerun()  # Seite neu laden, um die neuen Einträge anzuzeigen
+            
+            # Seite neu laden durch Manipulation von st.session_state
+            st.session_state["reload"] = not st.session_state.get("reload", False)
         else:
             st.warning("Der Eintrag darf nicht leer sein.")
