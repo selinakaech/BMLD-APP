@@ -55,7 +55,6 @@ st.markdown("""
  
         .dashboard-card:hover {
             transform: scale(1.05);
-            background-color: #e0f7ff;
         }
 </style>
 """, unsafe_allow_html=True)
