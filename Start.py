@@ -25,7 +25,7 @@ def set_background_from_url(image_url):
     )
  
 # --- Hintergrundbild-URL ---
-image_url = "https://www.kepler-chemnitz.de/wp-content/uploads/2020/05/Chemie_iStock-658148844_RomoloTavani-1024x566.jpg"
+image_url = "https://www.lebensmittelverband.de/fileadmin/_processed_/a/4/csm_AdobeStock_366724789_fotofabrika_2560x1340px_5055e2cdfc.jpg"
 set_background_from_url(image_url)
  
 # --- Benutzerdefiniertes CSS-Styling ---
