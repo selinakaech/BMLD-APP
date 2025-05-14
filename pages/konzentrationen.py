@@ -1,7 +1,6 @@
 # filepath: c:\Users\soray\OneDrive - ZHAW\Studium Biomed. Labordiagnostik\MODULE\2. Semester\Informatik\BMLD_App_Chemie\BMLD-APP\pages\Konzentrationen.py
 
 import streamlit as st
-import streamlit.components.v1 as components
 
 # set_page_config muss als erste Streamlit-Anweisung stehen
 st.set_page_config(page_title="Konzentrationsrechner", page_icon="⚗️", layout="centered")
