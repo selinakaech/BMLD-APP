@@ -82,6 +82,7 @@ data_manager.load_user_data(
 st.markdown("<div style='padding: 1rem 0;'>", unsafe_allow_html=True)
 
 for name, modul in {
+    "⚙️ Einstellungen": "settings",
     "🧪 Konzentrationen": "konzentrationen",
     "⚖️ Massenrechner": "massenrechner",
     "🔬 Periodensystem": "periodensystem",

@@ -1,4 +1,15 @@
 import streamlit as st
+
+# Anwenden der globalen Einstellungen
+if 'background_color' in st.session_state and 'font' in st.session_state:
+    st.markdown(f"<style>body {{ background-color: {st.session_state['background_color']}; font-family: {st.session_state['font']}; }}</style>", unsafe_allow_html=True)
+ 
+# Animationseffekt
+if 'animation' in st.session_state:
+    if st.session_state['animation'] == 'Feuerwerk':
+        st.balloons()
+    elif st.session_state['animation'] == 'Schneefall':
+        st.snow()
  
 def app():
 

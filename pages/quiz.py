@@ -54,6 +54,7 @@ def plot_time_series(progress_data):
 # Quiz-Seite
 def quiz_page():
     st.title("📝 Quiz")
+ 
     answers = {}
     progress_data = []
  
@@ -62,8 +63,11 @@ def quiz_page():
         st.text(f"{i}. {q['question']}")
         answer = st.text_input(f"Antwort für Frage {i}", key=f"answer_{i}")
         answers[i] = answer
-        # Zeige den aktuellen Fortschritt nach jeder Frage
-        if st.button(f"Antworten nach Frage {i} abschicken"):
+ 
+    # Button, um alle Antworten zu überprüfen und den Fortschritt zu berechnen
+    if st.button("Antworten abschicken"):
+        # Überprüfen der Antworten und speichern der Details
+        for i, q in enumerate(questions, start=1):
             correct = "Richtig" if answers[i].lower() == q["answer"].lower() else "Falsch"
             st.write(f"Frage {i}: {correct} (Ihre Antwort: {answers[i]})")
  
@@ -81,9 +85,9 @@ def quiz_page():
                 "Ihre Antwort": answers[i],
                 "Status": correct
             })
-    # Zeige den Gesamtfortschritt nach der letzten Frage
-    if st.button("Antworten abschicken und Fortschritt anzeigen"):
         st.success("Antworten gespeichert (Demo)")
+        st.write("Jetzt können Sie den Lernfortschritt unten sehen.")
+        # Lernfortschritt anzeigen
         plot_progress(progress["correct_answers"], progress["total_answers"])
  
         # Zeitliche Darstellung des Fortschritts
