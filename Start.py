@@ -4,6 +4,8 @@ from utils.data_manager import DataManager
 from utils.login_manager import LoginManager
 import importlib
 
+st.set_page_config(page_title="Chemie Dashboard", layout="wide", initial_sidebar_state="collapsed")
+
 # Funktion, um den Hintergrund per Bild-URL zu setzen
 def set_background_from_url(image_url):
     st.markdown(
@@ -25,8 +27,6 @@ image_url = "https://media.istockphoto.com/id/658148844/de/foto/labor-research.j
  
 # Hintergrund setzen
 set_background_from_url(image_url)
-
-st.set_page_config(page_title="Chemie Dashboard", layout="wide", initial_sidebar_state="collapsed")
 
 # 🎨 Benutzerdefiniertes CSS-Styling
 st.markdown("""
