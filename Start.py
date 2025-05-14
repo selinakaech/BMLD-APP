@@ -55,11 +55,11 @@ data_manager.load_user_data(
 # Navigation
 seiten = {
     "🧪 Konzentrationen": "konzentrationen",
-    "💧 Lösungen": "loesungen",
     "⚖️ Massenrechner": "massenrechner",
     "🔬 Periodensystem": "periodensystem",
     "🧫 pH-Rechner": "ph_rechner",
     "🧠 Quiz": "quiz",
+    "💧 Lernfortschritt": "lernfortschritt",
     "📋 Säure-Base-Tabelle": "saeure_base_tabelle",
     "📓 Tagebuch": "tagebuch"
 }
@@ -71,7 +71,6 @@ keys = list(seiten.keys())
 for i, name in enumerate(keys):
     if st.button(name):
         st.session_state.seite = seiten[name]
-        st.experimental_rerun()
  
 # Modul laden
 if st.session_state.seite:
