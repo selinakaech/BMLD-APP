@@ -1,7 +1,14 @@
 # Lernfortschritt-Seite
 def progress_page():
     st.title("📈 Lernfortschritt")
+    # Anzeige des Lernfortschritts in einem Diagramm
     plot_progress(progress["correct_answers"], progress["total_answers"])
+ 
+    # Anzeige einer Tabelle mit den Antworten und deren Status
+    if progress["total_answers"] > 0:
+        st.subheader("Antworten im Detail:")
+        answers_df = pd.DataFrame(progress["answers_detail"])
+        st.dataframe(answers_df)
  
 # App-Logik
 def app():

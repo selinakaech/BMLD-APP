@@ -1,45 +1,37 @@
 import streamlit as st
 import random
 import matplotlib.pyplot as plt
+import pandas as pd
  
 # Definiere die Liste von Beispiel-Fragen und Antworten
 questions = [
-    {"question": "Was ist der pKs-Wert von HCl?", "answer": "-6"},
-    {"question": "Welches Symbol hat das Element mit der Ordnungszahl 1?", "answer": "H"},
-    {"question": "Was ist die molare Masse von Wasser (H2O)?", "answer": "18.015"},
-    {"question": "Welche Elektronegativität hat Chlor?", "answer": "3.16"},
-    {"question": "Was ist der Aggregatzustand von Wasser bei Raumtemperatur?", "answer": "flüssig"},
-    {"question": "Welche Dichte hat Gold?", "answer": "19.32"},
-    {"question": "Was ist die pKs-Wert von Essigsäure?", "answer": "4.72"},
-    {"question": "Was ist die Ordnungszahl von Sauerstoff?", "answer": "8"},
-    {"question": "Was ist der pKs-Wert von Schwefelsäure?", "answer": "-3"},
+    {"question": "Was ist die chemische Formel von Wasser?", "answer": "H2O"},
+    {"question": "Welches Element hat das Symbol H?", "answer": "Wasserstoff"},
+    {"question": "Welches Element hat das Symbol O?", "answer": "Sauerstoff"},
     {"question": "Wie viele Protonen hat ein Wasserstoffatom?", "answer": "1"},
-    {"question": "Was ist die Kategorie von Kohlenstoff?", "answer": "Nichtmetall"},
-    {"question": "Was ist die Erscheinung von Gold?", "answer": "gelb, glänzend"},
-    {"question": "Was ist der pKs-Wert von HNO3?", "answer": "-1.32"},
-    {"question": "Was ist die Elektronegativität von Fluor?", "answer": "3.98"},
-    {"question": "Welche Dichte hat Eisen?", "answer": "7.87"},
-    {"question": "Was ist die molare Masse von Helium?", "answer": "4.0026"},
-    {"question": "Was ist der pKs-Wert von Oxalsäure?", "answer": "1.46"},
+    {"question": "Welches Gas atmen Menschen ein?", "answer": "Sauerstoff"},
+    {"question": "Was ist der pH-Wert von reinem Wasser?", "answer": "7"},
+    {"question": "Welches Element hat das Symbol Na?", "answer": "Natrium"},
+    {"question": "Was ist der Aggregatzustand von Eis bei Raumtemperatur?", "answer": "fest"},
     {"question": "Was ist der Aggregatzustand von Sauerstoff bei Raumtemperatur?", "answer": "gasförmig"},
-    {"question": "Was ist der pKs-Wert von Ammonium?", "answer": "9.21"},
-    {"question": "Was ist der pKs-Wert von Acetat?", "answer": "4.72"},
-    {"question": "Was ist die Ordnungszahl von Kohlenstoff?", "answer": "6"},
-    {"question": "Was ist der pKs-Wert von Natriumhydroxid?", "answer": "13.0"},
-    {"question": "Welche Dichte hat Kupfer?", "answer": "8.96"},
-    {"question": "Was ist der Aggregatzustand von Methan bei Raumtemperatur?", "answer": "gasförmig"},
-    {"question": "Was ist der pKs-Wert von Hydroxid?", "answer": "15.74"},
-    {"question": "Was ist der pKs-Wert von Schwefelwasserstoff?", "answer": "7.06"},
-    {"question": "Was ist die Elektronegativität von Sauerstoff?", "answer": "3.44"},
+    {"question": "Wie viele Elemente gibt es im Periodensystem?", "answer": "118"},
+    {"question": "Was ist die chemische Formel von Salz?", "answer": "NaCl"},
+    {"question": "Wie nennt man das Element mit der Ordnungszahl 1?", "answer": "Wasserstoff"},
+    {"question": "Was ist der pKs-Wert von Salzsäure?", "answer": "-6"},
+    {"question": "Was ist die Farbe von Kupfer?", "answer": "rotbraun"},
+    {"question": "Welches Element hat das Symbol He?", "answer": "Helium"},
+    {"question": "Was ist der Aggregatzustand von Stickstoff bei Raumtemperatur?", "answer": "gasförmig"},
     {"question": "Was ist die Dichte von Wasser?", "answer": "1.00"},
-    {"question": "Was ist der pKs-Wert von Phosphorsäure?", "answer": "1.96"},
-    {"question": "Was ist der pKs-Wert von Hydrofluorsäure?", "answer": "3.14"}
+    {"question": "Welches Element ist das leichteste im Periodensystem?", "answer": "Wasserstoff"},
+    {"question": "Was ist die chemische Formel für Kohlenstoffdioxid?", "answer": "CO2"},
+    {"question": "Welches Element hat das Symbol Fe?", "answer": "Eisen"}
 ]
  
 # Definiere den Lernfortschritt
 progress = {
     "correct_answers": 0,
-    "total_answers": 0
+    "total_answers": 0,
+    "answers_detail": []  # Speichert Details zu jeder Antwort
 }
  
 # Funktion für den Fortschritts-Chart
@@ -66,7 +58,7 @@ def quiz_page():
         answers[i] = answer
  
     if st.button("Antworten abschicken"):
-        # Überprüfen der Antworten
+        # Überprüfen der Antworten und speichern der Details
         for i, q in enumerate(random_questions, start=1):
             correct = "Richtig" if answers[i].lower() == q["answer"].lower() else "Falsch"
             st.write(f"Frage {i}: {correct} (Ihre Antwort: {answers[i]})")
@@ -74,23 +66,15 @@ def quiz_page():
             if correct == "Richtig":
                 progress["correct_answers"] += 1
             progress["total_answers"] += 1
+ 
+            # Speichern der Antwortdetails (Frage, Antwort und Status)
+            progress["answers_detail"].append({
+                "Frage": q["question"],
+                "Ihre Antwort": answers[i],
+                "Status": correct
+            })
         st.success("Antworten gespeichert (Demo)")
         st.write("Jetzt können Sie den Lernfortschritt auf der nächsten Seite sehen.")
         # Weiterleitung zur Lernfortschritts-Seite
         if st.button("Zum Lernfortschritt"):
             st.session_state["current_page"] = "Lernfortschritt"
- 
-# Lernfortschritt-Seite
-def progress_page():
-    st.title("📈 Lernfortschritt")
-    plot_progress(progress["correct_answers"], progress["total_answers"])
- 
-# App-Logik
-def app():
-    # Überprüfen, ob der Benutzer bereits eine Seite ausgewählt hat
-    if "current_page" not in st.session_state:
-        st.session_state["current_page"] = "Quiz"
-    if st.session_state["current_page"] == "Quiz":
-        quiz_page()
-    elif st.session_state["current_page"] == "Lernfortschritt":
-        progress_page()
