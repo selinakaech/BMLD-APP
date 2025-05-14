@@ -29,6 +29,7 @@ progress = {
     "total_answers": 0,
     "answers_detail": [],  # Speichert Details zu jeder Antwort
     "time_steps": [],  # Speichert Zeitstempel und Fortschritt
+    "quiz_count": 0,  # Zählt, wie oft das Quiz gelöst wurde
 }
  
 # Funktion für den Fortschritts-Chart
@@ -36,7 +37,7 @@ def plot_progress(time_data, progress_data):
     # Berechnung des Fortschritts
     fig, ax = plt.subplots(figsize=(8, 4))
     ax.plot(time_data, progress_data, marker='o', color='blue', linestyle='-', linewidth=2)
-    ax.set_xlabel('Zeit (s)')
+    ax.set_xlabel('Zeit (Quiz Durchläufe)')
     ax.set_ylabel('Fortschritt (%)')
     ax.set_title('Lernfortschritt im Verlauf des Quiz')
     ax.set_ylim(0, 100)
@@ -49,7 +50,7 @@ def quiz_page():
     progress_data = []
     time_data = []  # Speichert die Zeitpunkte, an denen der Fortschritt berechnet wird
  
-    start_time = time.time()  # Startzeit für die X-Achse
+    start_time = time.time()  # Startzeit für die X-Achse (Zeitpunkt des ersten Quizdurchgangs)
  
     # Iteriere durch alle Fragen und stelle sie der Reihe nach
     for i, q in enumerate(questions, start=1):
@@ -84,8 +85,11 @@ def quiz_page():
                 "Status": correct
             })
         st.success("Antworten gespeichert (Demo)")
+ 
+        # Speichern des Zeitpunkts für den aktuellen Quiz-Durchgang
+        progress["quiz_count"] += 1
         st.write("Jetzt können Sie den Lernfortschritt unten sehen.")
-        # Zeitliche Darstellung des Fortschritts
+        # Lernfortschritt anzeigen
         plot_progress(time_data, progress_data)
  
         # Tabelle mit Antworten und Status anzeigen
@@ -100,6 +104,7 @@ def quiz_page():
             progress["total_answers"] = 0
             progress["answers_detail"] = []
             progress["time_steps"] = []
+            progress["quiz_count"] = 0  # Zähler für die Anzahl der Quiz-Durchläufe zurücksetzen
             st.session_state["current_page"] = "Quiz"
             st.experimental_rerun()
  
