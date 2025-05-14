@@ -1,7 +1,14 @@
-import streamlit as st
-
-# Definiere die app()-Funktion
+# Lernfortschritt-Seite
+def progress_page():
+    st.title("📈 Lernfortschritt")
+    plot_progress(progress["correct_answers"], progress["total_answers"])
+ 
+# App-Logik
 def app():
-    # Lösungen
-    st.title("Lösungen")
-    st.line_chart([1, 3, 2, 4, 7, 5])  # Beispielhafte Fortschrittsgrafik
+    # Überprüfen, ob der Benutzer bereits eine Seite ausgewählt hat
+    if "current_page" not in st.session_state:
+        st.session_state["current_page"] = "Quiz"
+    if st.session_state["current_page"] == "Quiz":
+        quiz_page()
+    elif st.session_state["current_page"] == "Lernfortschritt":
+        progress_page()
