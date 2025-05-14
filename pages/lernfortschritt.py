@@ -1,3 +1,7 @@
+import streamlit as st
+import pandas as pd
+from quiz import quiz   # Importiere die Quiz-Funktion
+
 # Lernfortschritt-Seite
 def progress_page():
     st.title("📈 Lernfortschritt")
