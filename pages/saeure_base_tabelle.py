@@ -14,12 +14,15 @@ def app():
     base = st.text_input("🔵 Geben Sie eine Base ein (z.B. NaOH)")
     # Tabelle mit pKs-Werten für gängige Säuren und Basen
     pKs_wert = {
-        "HCl":  -6.3,
-        "H₂SO₄": -3.0,
-        "CH₃COOH": 4.76,
-        "NH₃":  9.25,
-        "NaOH": 13.0,
-        "KOH": 13.0
+        "HClO4": -9, "HCl": -6, "H2SO4": -3, "H3O+": -1.74, "HNO3": -1.32,
+        "HClO3": 0, "HOOCCOOH": 1.46, "HSO4-": 1.92, "H2SO3": 1.96, "H3PO4": 1.96,
+        "Weinsäure": 3, "Zitronensäure": 3.1, "HF": 3.14, "HNO2": 3.35, "HCOOH": 3.7,
+        "CH3CHOHCOOH": 3.87, "C6H5COOH": 4.22, "Hydrogentartrat": 4.3, "HOOCCOO-": 4.4,
+        "Dihydrogencitrat": 4.7, "CH3COOH": 4.72, "C3H7COOH": 4.82, "C2H5COOH": 4.88,
+        "Hydrogencitrat": 5.4, "H2CO3": 6.46, "H2S": 7.06, "HSO3-": 7.2, "H2PO4-": 7.21,
+        "HClO": 7.25, "NH4+": 9.21, "HCN": 9.4, "C6H5OH": 9.89, "HCO3-": 10.4,
+        "HPO4-": 12.32, "HS-": 12.9, "H2O": 15.74, "C2H5OH": 16, "CH3COCH3": 19,
+        "NH3": 23
     }
     # Anzeige der Tabelle mit Beispielen
     st.subheader("📊 Beispiel pKs-Werte")
