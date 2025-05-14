@@ -3,10 +3,11 @@ import pandas as pd
 from utils.data_manager import DataManager
 from utils.login_manager import LoginManager
 import importlib
-
+ 
+# --- Page Configuration ---
 st.set_page_config(page_title="Chemie Dashboard", layout="wide", initial_sidebar_state="collapsed")
-
-# Funktion, um den Hintergrund per Bild-URL zu setzen
+ 
+# --- Funktion: Hintergrundbild setzen ---
 def set_background_from_url(image_url):
     st.markdown(
         f"""
@@ -16,52 +17,42 @@ def set_background_from_url(image_url):
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
+            background-position: center;
         }}
 </style>
         """,
         unsafe_allow_html=True
     )
  
-# Deine Bild-URL
+# --- Hintergrundbild-URL ---
 image_url = "https://media.istockphoto.com/id/658148844/de/foto/labor-research.jpg?s=612x612&w=0&k=20&c=Wh6N39KUY_I64oIJ50qs3zCbBPzsvfOVMeSR36hPYRU="
- 
-# Hintergrund setzen
 set_background_from_url(image_url)
-
-# 🎨 Benutzerdefiniertes CSS-Styling
+ 
+# --- Benutzerdefiniertes CSS-Styling ---
 st.markdown("""
 <style>
-        [data-testid="collapsedControl"] {
-            display: none;
-        }
-        section[data-testid="stSidebar"] {
-            display: none;
-        }
-
-        .stApp {
-            background: linear-gradient(to bottom right, #f0f4f8, #e0ecf7);
-            font-family: 'Inter', sans-serif;
-        }
-
-        .dashboard-card {
-            font-size: 3rem;
-            padding: 3rem;
-            margin-bottom: 1rem;
-            text-align: center;
-            background-color: #ffffffdd;
-            border-radius: 1rem;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-            transition: transform 0.2s ease-in-out;
-            font-weight: bold;
-        }
-
-        .dashboard-card:hover {
-            transform: scale(1.05);
-            background-color: #e0f7ff;
-        }
+    [data-testid="collapsedControl"] { display: none; }
+    section[data-testid="stSidebar"] { display: none; }
+ 
+    .dashboard-card {
+        font-size: 3rem;
+        padding: 3rem;
+        margin-bottom: 1rem;
+        text-align: center;
+        background-color: #ffffffdd;
+        border-radius: 1rem;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        transition: transform 0.2s ease-in-out;
+        font-weight: bold;
+    }
+ 
+    .dashboard-card:hover {
+        transform: scale(1.05);
+        background-color: #e0f7ff;
+    }
 </style>
 """, unsafe_allow_html=True)
-
+ 
 # --- Einführungstext ---
 st.markdown("""
 <div style='text-align: center; padding: 1rem 2rem; font-size: 1.1rem;'>
@@ -84,26 +75,24 @@ Halte deine Gedanken, Erkenntnisse oder eigenen Erklärungen mit Datum fest – 
 Kontakt: gfrersor@students.zhaw.ch, heebadr1@students.zhaw.ch, kaechsel@students.zhaw.ch</em></p>
 </div>
 """, unsafe_allow_html=True)
-
-# Initialisierung
+ 
+# --- Initialisierung ---
 if "seite" not in st.session_state:
     st.session_state.seite = None
-
+ 
 data_manager = DataManager(fs_protocol='webdav', fs_root_folder="BMLD_Daten")
 login_manager = LoginManager(data_manager)
 login_manager.login_register()
-
+ 
 data_manager.load_user_data(
     session_state_key='data_df',
     file_name='data.csv',
     initial_value=pd.DataFrame(),
     parse_dates=['timestamp']
 )
-
-# Navigation
-st.markdown("<div style='padding: 1rem 0;'>", unsafe_allow_html=True)
-
-for name, modul in {
+ 
+# --- Navigation ---
+module_dict = {
     "⚙️ Einstellungen": "settings",
     "🧪 Konzentrationen": "konzentrationen",
     "⚖️ Massenrechner": "massenrechner",
@@ -112,18 +101,17 @@ for name, modul in {
     "📋 Säure-Base-Tabelle": "saeure_base_tabelle",
     "🧠 Quiz": "quiz",
     "📓 Tagebuch": "tagebuch"
-}.items():
-    if st.button(name, key=modul, help="Klicke, um das Modul zu öffnen", use_container_width=True):
+}
+ 
+for name, modul in module_dict.items():
+    if st.button(name, key=modul):
         st.session_state.seite = modul
-
-st.markdown("</div>", unsafe_allow_html=True)
-
-# Modul laden
+ 
+# --- Modul laden ---
 if st.session_state.seite:
     modulname = f"pages.{st.session_state.seite}"
     try:
         seite = importlib.import_module(modulname)
-        st.success(f"✅ Modul '{modulname}' wurde geladen.")
         if hasattr(seite, "app"):
             seite.app()
     except Exception as e:
