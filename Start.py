@@ -20,6 +20,12 @@ st.markdown("""
             background: linear-gradient(to bottom right, #f0f4f8, #e0ecf7);
             font-family: 'Inter', sans-serif;
         }
+ 
+        .dashboard-card {
+            font-size: 1.2rem; /* Größere Schrift für die Seitentitel */
+            padding: 2rem; /* Größere Boxen */
+            margin-bottom: 1rem; /* Abstand zwischen den Boxen */
+        }
 </style>
 """, unsafe_allow_html=True)
  
@@ -59,7 +65,7 @@ seiten = {
     "🔬 Periodensystem": "periodensystem",
     "🧫 pH-Rechner": "ph_rechner",
     "🧠 Quiz": "quiz",
-    "💧 Lernfortschritt": "lernfortschritt",
+    "📈 Lernfortschritt": "lernfortschritt",
     "📋 Säure-Base-Tabelle": "saeure_base_tabelle",
     "📓 Tagebuch": "tagebuch"
 }
@@ -69,7 +75,7 @@ if "seite" not in st.session_state:
  
 keys = list(seiten.keys())
 for i, name in enumerate(keys):
-    if st.button(name):
+    if st.button(name, key=f"button_{i}", help="Klicke, um das Modul zu öffnen"):
         st.session_state.seite = seiten[name]
  
 # Modul laden
