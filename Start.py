@@ -22,8 +22,8 @@ st.markdown("""
         }
  
         .dashboard-card {
-            font-size: 1.3rem;
-            padding: 2rem;
+            font-size: 2.0rem;
+            padding: 2.5rem;
             margin-bottom: 1rem;
             text-align: center;
             background-color: #ffffffdd;
@@ -70,29 +70,22 @@ data_manager.load_user_data(
 )
  
 # Navigation
-st.markdown("<div style='display: flex; justify-content: space-between;'>", unsafe_allow_html=True)
+st.markdown("<div style='padding: 1rem 0;'>", unsafe_allow_html=True)
  
-col1, col2 = st.columns(2)
+for name, modul in {
+    "🧪 Konzentrationen": "konzentrationen",
+    "⚖️ Massenrechner": "massenrechner",
+    "🔬 Periodensystem": "periodensystem",
+    "🧫 pH-Rechner": "ph_rechner",
+    "📋 Säure-Base-Tabelle": "saeure_base_tabelle",
+    "🧠 Quiz": "quiz",
+    "📈 Lernfortschritt": "lernfortschritt",
+    "📓 Tagebuch": "tagebuch"
+}.items():
+    if st.button(name, key=modul, help="Klicke, um das Modul zu öffnen", use_container_width=True):
+        st.session_state.seite = modul
  
-with col1:
-    if st.button("🧪 Konzentrationen", key="konzentrationen"):
-        st.session_state.seite = "konzentrationen"
-    if st.button("⚖️ Massenrechner", key="massenrechner"):
-        st.session_state.seite = "massenrechner"
-    if st.button("🔬 Periodensystem", key="periodensystem"):
-        st.session_state.seite = "periodensystem"
-    if st.button("🧫 pH-Rechner", key="ph_rechner"):
-        st.session_state.seite = "ph_rechner"
- 
-with col2:
-    if st.button("📋 Säure-Base-Tabelle", key="saeure_base_tabelle"):
-        st.session_state.seite = "saeure_base_tabelle"
-    if st.button("🧠 Quiz", key="quiz"):
-        st.session_state.seite = "quiz"
-    if st.button("📈 Lernfortschritt", key="lernfortschritt"):
-        st.session_state.seite = "lernfortschritt"
-    if st.button("📓 Tagebuch", key="tagebuch"):
-        st.session_state.seite = "tagebuch"
+st.markdown("</div>", unsafe_allow_html=True)
  
 # Modul laden
 if st.session_state.seite:
