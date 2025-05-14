@@ -4,20 +4,27 @@ from utils.data_manager import DataManager
 from utils.login_manager import LoginManager
 import importlib
 
-# CSS für das Hintergrundbild
-page_bg = f"""
+# Funktion, um den Hintergrund per Bild-URL zu setzen
+def set_background_from_url(image_url):
+    st.markdown(
+        f"""
 <style>
-body {{
-    background-image: url('https://media.istockphoto.com/id/658148844/de/foto/labor-research.jpg?s=612x612&w=0&k=20&c=Wh6N39KUY_I64oIJ50qs3zCbBPzsvfOVMeSR36hPYRU=');
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-}}
+        .stApp {{
+            background-image: url("{image_url}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
 </style>
-"""
+        """,
+        unsafe_allow_html=True
+    )
  
-st.markdown(page_bg, unsafe_allow_html=True)
+# Deine Bild-URL
+image_url = "https://media.istockphoto.com/id/658148844/de/foto/labor-research.jpg?s=612x612&w=0&k=20&c=Wh6N39KUY_I64oIJ50qs3zCbBPzsvfOVMeSR36hPYRU="
+ 
+# Hintergrund setzen
+set_background_from_url(image_url)
 
 st.set_page_config(page_title="Chemie Dashboard", layout="wide", initial_sidebar_state="collapsed")
 
