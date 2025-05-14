@@ -3,9 +3,9 @@ import pandas as pd
 from utils.data_manager import DataManager
 from utils.login_manager import LoginManager
 import importlib
- 
+
 st.set_page_config(page_title="Chemie Dashboard", layout="wide", initial_sidebar_state="collapsed")
- 
+
 # 🎨 Benutzerdefiniertes CSS-Styling
 st.markdown("""
 <style>
@@ -15,12 +15,12 @@ st.markdown("""
         section[data-testid="stSidebar"] {
             display: none;
         }
- 
+
         .stApp {
             background: linear-gradient(to bottom right, #f0f4f8, #e0ecf7);
             font-family: 'Inter', sans-serif;
         }
- 
+
         .dashboard-card {
             font-size: 3rem;
             padding: 3rem;
@@ -32,14 +32,14 @@ st.markdown("""
             transition: transform 0.2s ease-in-out;
             font-weight: bold;
         }
- 
+
         .dashboard-card:hover {
             transform: scale(1.05);
             background-color: #e0f7ff;
         }
 </style>
 """, unsafe_allow_html=True)
- 
+
 # --- Einführungstext ---
 st.markdown("""
 <div style='text-align: center; padding: 1rem 2rem; font-size: 1.1rem;'>
@@ -58,27 +58,29 @@ Nutze die integrierte Lernkontrolle, um jederzeit zu sehen, wie weit du schon ge
 <p>📝 <strong>Lerntagebuch inklusive!</strong><br>
 Halte deine Gedanken, Erkenntnisse oder eigenen Erklärungen mit Datum fest – perfekt zum Nachschlagen oder als persönliches Lernarchiv! 💡🗓️</p>
 <p>Viel Spaß beim Entdecken und Lernen! 🚀</p>
-<p style="font-size: 0.9rem; color: gray;'><em>Diese App wurde von Soraya Gfrerer, Adriana Heeb und Selina Käch entwickelt.<br>
+<p style="font-size: 0.9rem; color: gray;"><em>Diese App wurde von Soraya Gfrerer, Adriana Heeb und Selina Käch entwickelt.<br>
 Kontakt: gfrersor@students.zhaw.ch, heebadr1@students.zhaw.ch, kaechsel@students.zhaw.ch</em></p>
 </div>
 """, unsafe_allow_html=True)
- 
+
 # Initialisierung
-st.session_state.setdefault("seite", None)
+if "seite" not in st.session_state:
+    st.session_state.seite = None
+
 data_manager = DataManager(fs_protocol='webdav', fs_root_folder="BMLD_Daten")
 login_manager = LoginManager(data_manager)
 login_manager.login_register()
- 
+
 data_manager.load_user_data(
     session_state_key='data_df',
     file_name='data.csv',
     initial_value=pd.DataFrame(),
     parse_dates=['timestamp']
 )
- 
+
 # Navigation
 st.markdown("<div style='padding: 1rem 0;'>", unsafe_allow_html=True)
- 
+
 for name, modul in {
     "🧪 Konzentrationen": "konzentrationen",
     "⚖️ Massenrechner": "massenrechner",
@@ -90,9 +92,9 @@ for name, modul in {
 }.items():
     if st.button(name, key=modul, help="Klicke, um das Modul zu öffnen", use_container_width=True):
         st.session_state.seite = modul
- 
+
 st.markdown("</div>", unsafe_allow_html=True)
- 
+
 # Modul laden
 if st.session_state.seite:
     modulname = f"pages.{st.session_state.seite}"
