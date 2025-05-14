@@ -1,6 +1,4 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
 import random
 import matplotlib.pyplot as plt
  
@@ -81,3 +79,18 @@ def quiz_page():
         # Weiterleitung zur Lernfortschritts-Seite
         if st.button("Zum Lernfortschritt"):
             st.session_state["current_page"] = "Lernfortschritt"
+ 
+# Lernfortschritt-Seite
+def progress_page():
+    st.title("📈 Lernfortschritt")
+    plot_progress(progress["correct_answers"], progress["total_answers"])
+ 
+# App-Logik
+def app():
+    # Überprüfen, ob der Benutzer bereits eine Seite ausgewählt hat
+    if "current_page" not in st.session_state:
+        st.session_state["current_page"] = "Quiz"
+    if st.session_state["current_page"] == "Quiz":
+        quiz_page()
+    elif st.session_state["current_page"] == "Lernfortschritt":
+        progress_page()

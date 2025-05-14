@@ -7,42 +7,49 @@ import importlib
 st.set_page_config(page_title="Chemie Dashboard", layout="wide", initial_sidebar_state="collapsed")
  
 # 🎨 Benutzerdefiniertes CSS-Styling
-st.markdown("""
+if "bg_color" not in st.session_state:
+    st.session_state.bg_color = "#f0f4f8"
+ 
+if "symbol_pattern" not in st.session_state:
+    st.session_state.symbol_pattern = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200' viewBox='0 0 200 200'><text x='10' y='40' font-size='26' fill='rgba(0,0,0,0.04)' font-family='monospace'>:Cl:</text></svg>"
+ 
+# Settings
+with st.sidebar:
+    st.header("⚙️ Einstellungen")
+    st.session_state.bg_color = st.color_picker("Hintergrundfarbe auswählen", value=st.session_state.bg_color)
+    st.session_state.symbol_pattern = st.text_area("Symbol-Muster (SVG)", value=st.session_state.symbol_pattern)
+ 
+st.markdown(f"""
 <style>
-        [data-testid="collapsedControl"] {
-            display: none;
-        }
-        section[data-testid="stSidebar"] {
-            display: none;
-        }
- 
-        .stApp {
-            background: linear-gradient(to bottom right, #f0f4f8, #e0ecf7);
+        .stApp {{
+            background: {st.session_state.bg_color};
             font-family: 'Inter', sans-serif;
-        }
+            background-image: url('{st.session_state.symbol_pattern}');
+            background-repeat: repeat;
+            background-size: 200px;
+        }}
  
-        .dashboard-card {
+        .grid-container {{
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            padding: 2rem 0;
+        }}
+ 
+        .dashboard-card {{
             font-size: 1.3rem;
-            padding: 2rem;
-            margin-bottom: 1rem;
+            padding: 1.5rem;
             text-align: center;
             background-color: #ffffffdd;
             border-radius: 1rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             transition: transform 0.2s ease-in-out;
-        }
+        }}
  
-        .dashboard-card:hover {
+        .dashboard-card:hover {{
             transform: scale(1.05);
             background-color: #e0f7ff;
-        }
- 
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            padding: 1rem 0;
-        }
+        }}
 </style>
 """, unsafe_allow_html=True)
  
@@ -52,14 +59,6 @@ st.markdown("""
 <h2>LabMate</h2>
 <p>🔬 Willkommen in deiner persönlichen Chemie-Hilfe! 🧪<br>
 Diese App ist dein vielseitiger Begleiter für chemische Aufgaben – egal ob in der Schule, im Studium oder beim Selbstlernen! 📚✨</p>
-<p><strong>Hier findest du hilfreiche Tools wie:</strong></p>
-<ul>
-<li>🔹 Rechenhilfen (z. B. pH-Wert, Konzentrationen)</li>
-<li>🔹 Ein interaktives Periodensystem</li>
-<li>🔹 Unterstützung beim Umstellen von Formeln</li>
-<li>🔹 Und vieles mehr!</li>
-</ul>
-<p>Viel Spass beim Entdecken und Lernen! 🚀</p>
 </div>
 """, unsafe_allow_html=True)
  
@@ -87,13 +86,10 @@ seiten = {
     "📓 Tagebuch": "tagebuch"
 }
  
-if "seite" not in st.session_state:
-    st.session_state.seite = None
- 
 st.markdown("<div class='grid-container'>", unsafe_allow_html=True)
  
 for name, modul in seiten.items():
-    if st.button(name, key=modul, help="Klicke, um das Modul zu öffnen"):
+    if st.button(name, key=modul, help="Klicke, um das Modul zu öffnen", use_container_width=True):
         st.session_state.seite = modul
  
 st.markdown("</div>", unsafe_allow_html=True)
