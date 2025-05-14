@@ -2,8 +2,10 @@
 
 import streamlit as st
 import streamlit.components.v1 as components
- 
+
+# set_page_config muss als erste Streamlit-Anweisung stehen
 st.set_page_config(page_title="Konzentrationsrechner", page_icon="⚗️", layout="centered")
+
 st.markdown(
     """
 <style>
@@ -15,13 +17,13 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
- 
+
 st.title("⚗️ Konzentrationsrechner")
 st.write("Hier kannst du Konzentrationen berechnen.")
- 
+
 n = st.number_input("Stoffmenge (mol)", min_value=0.0, format="%.4f")
 V = st.number_input("Volumen (L)", min_value=0.0, format="%.4f")
- 
+
 if st.button("Berechnen"):
     if n > 0 and V > 0:
         c = n / V
