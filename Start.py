@@ -35,15 +35,17 @@ st.markdown("""
     section[data-testid="stSidebar"] { display: none; }
  
     .dashboard-card {
-        font-size: 3rem;
-        padding: 3rem;
-        margin-bottom: 1rem;
+        font-size: 3.5rem;
+        padding: 4rem;
+        margin-bottom: 1.5rem;
         text-align: center;
         background-color: #ffffffdd;
         border-radius: 1rem;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         transition: transform 0.2s ease-in-out;
         font-weight: bold;
+        color: #000000; /* Dunkelstes Schwarz */
+        max-width: 100%;
     }
  
     .dashboard-card:hover {
