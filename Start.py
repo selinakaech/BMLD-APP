@@ -22,9 +22,26 @@ st.markdown("""
         }
  
         .dashboard-card {
-            font-size: 1.2rem; /* Größere Schrift für die Seitentitel */
-            padding: 2rem; /* Größere Boxen */
-            margin-bottom: 1rem; /* Abstand zwischen den Boxen */
+            font-size: 1.3rem;
+            padding: 2rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            background-color: #ffffffdd;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: transform 0.2s ease-in-out;
+        }
+ 
+        .dashboard-card:hover {
+            transform: scale(1.05);
+            background-color: #e0f7ff;
+        }
+ 
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            padding: 1rem 0;
         }
 </style>
 """, unsafe_allow_html=True)
@@ -73,10 +90,13 @@ seiten = {
 if "seite" not in st.session_state:
     st.session_state.seite = None
  
-keys = list(seiten.keys())
-for i, name in enumerate(keys):
-    if st.button(name, key=f"button_{i}", help="Klicke, um das Modul zu öffnen"):
-        st.session_state.seite = seiten[name]
+st.markdown("<div class='grid-container'>", unsafe_allow_html=True)
+ 
+for name, modul in seiten.items():
+    if st.button(name, key=modul, help="Klicke, um das Modul zu öffnen"):
+        st.session_state.seite = modul
+ 
+st.markdown("</div>", unsafe_allow_html=True)
  
 # Modul laden
 if st.session_state.seite:
