@@ -22,8 +22,8 @@ st.markdown("""
         }
  
         .dashboard-card {
-            font-size: 2.0rem;
-            padding: 2.5rem;
+            font-size: 3rem;
+            padding: 3rem;
             margin-bottom: 1rem;
             text-align: center;
             background-color: #ffffffdd;
@@ -40,24 +40,31 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
  
-# Einführungstext
+# --- Einführungstext ---
 st.markdown("""
 <div style='text-align: center; padding: 1rem 2rem; font-size: 1.1rem;'>
 <h2>LabMate</h2>
 <p>🔬 Willkommen in deiner persönlichen Chemie-Hilfe! 🧪<br>
 Diese App ist dein vielseitiger Begleiter für chemische Aufgaben – egal ob in der Schule, im Studium oder beim Selbstlernen! 📚✨</p>
 <p><strong>Hier findest du hilfreiche Tools wie:</strong></p>
-<ul>
+<ul style="text-align: left; max-width: 600px; margin: 0 auto;">
 <li>🔹 Rechenhilfen (z. B. pH-Wert, Konzentrationen)</li>
 <li>🔹 Ein interaktives Periodensystem</li>
 <li>🔹 Unterstützung beim Umstellen von Formeln</li>
 <li>🔹 Und vieles mehr!</li>
 </ul>
-<p>Viel Spass beim Entdecken und Lernen! 🚀</p>
+<p>📈 <strong>Behalte deinen Fortschritt im Blick!</strong><br>
+Nutze die integrierte Lernkontrolle, um jederzeit zu sehen, wie weit du schon gekommen bist und woran du noch arbeiten möchtest.</p>
+<p>📝 <strong>Lerntagebuch inklusive!</strong><br>
+Halte deine Gedanken, Erkenntnisse oder eigenen Erklärungen mit Datum fest – perfekt zum Nachschlagen oder als persönliches Lernarchiv! 💡🗓️</p>
+<p>Viel Spaß beim Entdecken und Lernen! 🚀</p>
+<p style="font-size: 0.9rem; color: gray;'><em>Diese App wurde von Soraya Gfrerer, Adriana Heeb und Selina Käch entwickelt.<br>
+Kontakt: gfrersor@students.zhaw.ch, heebadr1@students.zhaw.ch, kaechsel@students.zhaw.ch</em></p>
 </div>
 """, unsafe_allow_html=True)
  
 # Initialisierung
+st.session_state.setdefault("seite", None)
 data_manager = DataManager(fs_protocol='webdav', fs_root_folder="BMLD_Daten")
 login_manager = LoginManager(data_manager)
 login_manager.login_register()
@@ -79,7 +86,6 @@ for name, modul in {
     "🧫 pH-Rechner": "ph_rechner",
     "📋 Säure-Base-Tabelle": "saeure_base_tabelle",
     "🧠 Quiz": "quiz",
-    "📈 Lernfortschritt": "lernfortschritt",
     "📓 Tagebuch": "tagebuch"
 }.items():
     if st.button(name, key=modul, help="Klicke, um das Modul zu öffnen", use_container_width=True):
