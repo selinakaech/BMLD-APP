@@ -2,7 +2,6 @@ import streamlit as st
 import random
 import matplotlib.pyplot as plt
 import pandas as pd
-import time
  
 # Liste von 15 statischen Fragen und Antworten
 questions = [
@@ -28,16 +27,25 @@ progress = {
     "correct_answers": 0,
     "total_answers": 0,
     "answers_detail": [],  # Speichert Details zu jeder Antwort
-    "time_steps": [],  # Speichert Zeitstempel und Fortschritt
-    "quiz_count": 0,  # Zählt, wie oft das Quiz gelöst wurde
+    "time_steps": [],  # Speichert Fortschritt bei jedem Schritt
 }
  
 # Funktion für den Fortschritts-Chart
-def plot_progress(time_data, progress_data):
+def plot_progress(correct_answers, total_answers):
     # Berechnung des Fortschritts
+    progress_percentage = (correct_answers / total_answers) * 100 if total_answers > 0 else 0
+    fig, ax = plt.subplots()
+    ax.bar(["Fortschritt"], [progress_percentage], color='green')
+    ax.set_ylim(0, 100)
+    ax.set_ylabel("Fortschritt (%)")
+    ax.set_title("Lernfortschritt")
+    st.pyplot(fig)
+ 
+# Funktion zur Darstellung des Lernfortschritts im Verlauf der Zeit
+def plot_time_series(progress_data):
     fig, ax = plt.subplots(figsize=(8, 4))
-    ax.plot(time_data, progress_data, marker='o', color='blue', linestyle='-', linewidth=2)
-    ax.set_xlabel('Zeit (Quiz Durchläufe)')
+    ax.plot(range(1, len(progress_data) + 1), progress_data, marker='o', color='blue', linestyle='-', linewidth=2)
+    ax.set_xlabel('Fragen')
     ax.set_ylabel('Fortschritt (%)')
     ax.set_title('Lernfortschritt im Verlauf des Quiz')
     ax.set_ylim(0, 100)
@@ -46,11 +54,9 @@ def plot_progress(time_data, progress_data):
 # Quiz-Seite
 def quiz_page():
     st.title("📝 Quiz")
+ 
     answers = {}
     progress_data = []
-    time_data = []  # Speichert die Zeitpunkte, an denen der Fortschritt berechnet wird
- 
-    start_time = time.time()  # Startzeit für die X-Achse (Zeitpunkt des ersten Quizdurchgangs)
  
     # Iteriere durch alle Fragen und stelle sie der Reihe nach
     for i, q in enumerate(questions, start=1):
@@ -70,14 +76,9 @@ def quiz_page():
                 progress["correct_answers"] += 1
             progress["total_answers"] += 1
  
-            # Berechne den Fortschritt
+            # Fortschritt bei diesem Schritt speichern
             progress_percentage = (progress["correct_answers"] / progress["total_answers"]) * 100 if progress["total_answers"] > 0 else 0
             progress_data.append(progress_percentage)
- 
-            # Speichern des Zeitpunkts (vergangene Zeit seit dem Start des Quiz)
-            elapsed_time = time.time() - start_time  # Zeit in Sekunden
-            time_data.append(elapsed_time)
- 
             # Speichern der Antwortdetails (Frage, Antwort und Status)
             progress["answers_detail"].append({
                 "Frage": q["question"],
@@ -85,13 +86,12 @@ def quiz_page():
                 "Status": correct
             })
         st.success("Antworten gespeichert (Demo)")
- 
-        # Speichern des Zeitpunkts für den aktuellen Quiz-Durchgang
-        progress["quiz_count"] += 1
         st.write("Jetzt können Sie den Lernfortschritt unten sehen.")
         # Lernfortschritt anzeigen
-        plot_progress(time_data, progress_data)
+        plot_progress(progress["correct_answers"], progress["total_answers"])
  
+        # Zeitliche Darstellung des Fortschritts
+        plot_time_series(progress_data)
         # Tabelle mit Antworten und Status anzeigen
         st.subheader("Antworten im Detail:")
         answers_df = pd.DataFrame(progress["answers_detail"])
@@ -104,7 +104,6 @@ def quiz_page():
             progress["total_answers"] = 0
             progress["answers_detail"] = []
             progress["time_steps"] = []
-            progress["quiz_count"] = 0  # Zähler für die Anzahl der Quiz-Durchläufe zurücksetzen
             st.session_state["current_page"] = "Quiz"
             st.experimental_rerun()
  

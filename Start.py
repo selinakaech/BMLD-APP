@@ -3,10 +3,10 @@ import pandas as pd
 from utils.data_manager import DataManager
 from utils.login_manager import LoginManager
 import importlib
-
+ 
 # --- Page Configuration ---
 st.set_page_config(page_title="Chemie Dashboard", layout="wide", initial_sidebar_state="collapsed")
-
+ 
 # --- Funktion: Hintergrundbild setzen ---
 def set_background_from_url(image_url):
     st.markdown(
@@ -23,47 +23,42 @@ def set_background_from_url(image_url):
         """,
         unsafe_allow_html=True
     )
-
+ 
 # --- Hintergrundbild-URL ---
 image_url = "https://www.lebensmittelverband.de/fileadmin/_processed_/a/4/csm_AdobeStock_366724789_fotofabrika_2560x1340px_5055e2cdfc.jpg"
 set_background_from_url(image_url)
-
+ 
 # --- Benutzerdefiniertes CSS-Styling ---
 st.markdown("""
 <style>
     [data-testid="collapsedControl"] { display: none; }
     section[data-testid="stSidebar"] { display: none; }
-
-    .dashboard-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        margin-top: 2rem;
-    }
-
+ 
     .dashboard-card {
-        font-size: 3.5rem;
-        padding: 4rem;
-        margin: 1rem 0;
+        font-size: 2rem;
+        padding: 1rem 2rem;
+        margin-bottom: 1rem;
         text-align: center;
-        background-color: #ffffffdd;
+        background-color: #ffffffcc;
         border-radius: 1rem;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
         transition: transform 0.2s ease-in-out;
         font-weight: bold;
         color: #000000;
         width: 100%;
-        max-width: 1200px;
+        max-width: 300px;
+        margin-left: auto;
+        margin-right: auto;
     }
-
+ 
     .dashboard-card:hover {
-        transform: scale(1.05);
+        transform: scale(1.08);
         background-color: #e0f7ff;
+        border: 2px solid #007acc;
     }
 </style>
 """, unsafe_allow_html=True)
-
+ 
 # --- Einführungstext ---
 st.markdown("""
 <div style='text-align: center; padding: 1rem 2rem; font-size: 1.1rem;'>
@@ -86,22 +81,22 @@ Halte deine Gedanken, Erkenntnisse oder eigenen Erklärungen mit Datum fest – 
 Kontakt: gfrersor@students.zhaw.ch, heebadr1@students.zhaw.ch, kaechsel@students.zhaw.ch</em></p>
 </div>
 """, unsafe_allow_html=True)
-
+ 
 # --- Initialisierung ---
 if "seite" not in st.session_state:
     st.session_state.seite = None
-
+ 
 data_manager = DataManager(fs_protocol='webdav', fs_root_folder="BMLD_Daten")
 login_manager = LoginManager(data_manager)
 login_manager.login_register()
-
+ 
 data_manager.load_user_data(
     session_state_key='data_df',
     file_name='data.csv',
     initial_value=pd.DataFrame(),
     parse_dates=['timestamp']
 )
-
+ 
 # --- Navigation ---
 module_dict = {
     "⚙️ Einstellungen": "settings",
@@ -113,13 +108,11 @@ module_dict = {
     "🧠 Quiz": "quiz",
     "📓 Tagebuch": "tagebuch"
 }
-
-st.markdown("<div class='dashboard-container'>", unsafe_allow_html=True)
+ 
 for name, modul in module_dict.items():
-    if st.button(name, key=modul):
+    if st.button(name, key=modul, help="Klicke, um das Modul zu öffnen"):
         st.session_state.seite = modul
-st.markdown("</div>", unsafe_allow_html=True)
-
+ 
 # --- Modul laden ---
 if st.session_state.seite:
     modulname = f"pages.{st.session_state.seite}"
