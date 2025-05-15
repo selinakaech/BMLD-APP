@@ -78,11 +78,12 @@ data_manager = DataManager(fs_protocol='webdav', fs_root_folder="BMLD_Daten")
 login_manager = LoginManager(data_manager)
 login_manager.login_register()
 
+# Korrigierter Ladevorgang ohne parse_dates (um Fehler zu vermeiden, falls timestamp noch nicht existiert)
 data_manager.load_user_data(
     session_state_key='data_df',
     file_name='data.csv',
-    initial_value=pd.DataFrame(),
-    parse_dates=['timestamp']
+    initial_value=pd.DataFrame()
+    # parse_dates=['timestamp']  # Erst aktivieren, wenn die Spalte sicher existiert!
 )
 
 # Navigation
