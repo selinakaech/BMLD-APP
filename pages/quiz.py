@@ -97,7 +97,7 @@ def quiz_page():
         DataManager().append_record(session_state_key='data_df', record_dict=result)
 
         st.success("Antworten gespeichert (Demo)")
-        st.write("Jetzt können Sie den Lernfortschritt unten sehen.")
+        st.write("Jetzt können Sie Ihre persönliche Entwicklung unter Lernfortschritt anzeigen lassen.")
         # Lernfortschritt anzeigen
         plot_progress(progress["correct_answers"], progress["total_answers"])
 

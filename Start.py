@@ -96,6 +96,7 @@ for name, modul in {
     "🧫 pH-Rechner": "ph_rechner",
     "📋 Säure-Base-Tabelle": "saeure_base_tabelle",
     "🧠 Quiz": "quiz",
+    "📈 Lernfortschritt": "lernfortschritt",
     "📓 Tagebuch": "tagebuch"
 }.items():
     if st.button(name, key=modul, help="Klicke, um das Modul zu öffnen", use_container_width=True):
