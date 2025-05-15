@@ -4,6 +4,8 @@ from utils.data_manager import DataManager
 from utils.login_manager import LoginManager
 import importlib
 
+st.set_page_config(page_title="Chemie Dashboard", layout="wide", initial_sidebar_state="collapsed")
+
 # initialize the data manager
 data_manager = DataManager(fs_protocol='webdav', fs_root_folder="BMLD_Daten")  # switch drive 
 
@@ -19,8 +21,6 @@ data_manager.load_user_data(
     parse_dates = ['timestamp']
     )
 # ====== End Init Block ======
-
-st.set_page_config(page_title="Chemie Dashboard", layout="wide", initial_sidebar_state="collapsed")
 
 # 🎨 Benutzerdefiniertes CSS-Styling
 st.markdown("""
