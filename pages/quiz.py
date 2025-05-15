@@ -2,7 +2,7 @@ import streamlit as st
 import random
 import matplotlib.pyplot as plt
 import pandas as pd
- 
+
 # Liste von 15 statischen Fragen und Antworten
 questions = [
     {"question": "Was ist die chemische Formel von Wasser?", "answer": "H2O"},
@@ -21,7 +21,7 @@ questions = [
     {"question": "Was ist die Farbe von Kupfer?", "answer": "rotbraun"},
     {"question": "Welches Element hat das Symbol He?", "answer": "Helium"}
 ]
- 
+
 # Definiere den Lernfortschritt
 progress = {
     "correct_answers": 0,
@@ -29,7 +29,7 @@ progress = {
     "answers_detail": [],  # Speichert Details zu jeder Antwort
     "time_steps": [],  # Speichert Fortschritt bei jedem Schritt
 }
- 
+
 # Funktion für den Fortschritts-Chart
 def plot_progress(correct_answers, total_answers):
     # Berechnung des Fortschritts
@@ -40,7 +40,7 @@ def plot_progress(correct_answers, total_answers):
     ax.set_ylabel("Fortschritt (%)")
     ax.set_title("Lernfortschritt")
     st.pyplot(fig)
- 
+
 # Funktion zur Darstellung des Lernfortschritts im Verlauf der Zeit
 def plot_time_series(progress_data):
     fig, ax = plt.subplots(figsize=(8, 4))
@@ -50,32 +50,32 @@ def plot_time_series(progress_data):
     ax.set_title('Lernfortschritt im Verlauf des Quiz')
     ax.set_ylim(0, 100)
     st.pyplot(fig)
- 
+
 # Quiz-Seite
 def quiz_page():
     st.title("📝 Quiz")
- 
+
     answers = {}
     progress_data = []
- 
+
     # Iteriere durch alle Fragen und stelle sie der Reihe nach
     for i, q in enumerate(questions, start=1):
         st.text(f"{i}. {q['question']}")
         answer = st.text_input(f"Antwort für Frage {i}", key=f"answer_{i}")
         answers[i] = answer
- 
+
     # Button, um alle Antworten zu überprüfen und den Fortschritt zu berechnen
     if st.button("Antworten abschicken"):
         # Überprüfen der Antworten und speichern der Details
         for i, q in enumerate(questions, start=1):
             correct = "Richtig" if answers[i].lower() == q["answer"].lower() else "Falsch"
             st.write(f"Frage {i}: {correct} (Ihre Antwort: {answers[i]})")
- 
+
             # Fortschritt speichern
             if correct == "Richtig":
                 progress["correct_answers"] += 1
             progress["total_answers"] += 1
- 
+
             # Fortschritt bei diesem Schritt speichern
             progress_percentage = (progress["correct_answers"] / progress["total_answers"]) * 100 if progress["total_answers"] > 0 else 0
             progress_data.append(progress_percentage)
@@ -85,18 +85,29 @@ def quiz_page():
                 "Ihre Antwort": answers[i],
                 "Status": correct
             })
+
+        # --- Save Quiz data ---
+        result = {
+            "correct_answers": progress["correct_answers"],
+            "total_answers": progress["total_answers"],
+            "answers_detail": progress["answers_detail"],
+            # Optional: Zeitstempel oder Benutzername ergänzen
+        }
+        from utils.data_manager import DataManager
+        DataManager().append_record(session_state_key='data_df', record_dict=result)
+
         st.success("Antworten gespeichert (Demo)")
         st.write("Jetzt können Sie den Lernfortschritt unten sehen.")
         # Lernfortschritt anzeigen
         plot_progress(progress["correct_answers"], progress["total_answers"])
- 
+
         # Zeitliche Darstellung des Fortschritts
         plot_time_series(progress_data)
         # Tabelle mit Antworten und Status anzeigen
         st.subheader("Antworten im Detail:")
         answers_df = pd.DataFrame(progress["answers_detail"])
         st.dataframe(answers_df)
- 
+
         # Button zum Wiederholen des Quiz
         if st.button("Quiz wiederholen"):
             # Reset für die aktuellen Fortschrittsdaten und Umleitung zur Quiz-Seite
@@ -106,7 +117,7 @@ def quiz_page():
             progress["time_steps"] = []
             st.session_state["current_page"] = "Quiz"
             st.experimental_rerun()
- 
+
 # App-Logik
 def app():
     # Überprüfen, ob der Benutzer bereits eine Seite ausgewählt hat
@@ -114,7 +125,5 @@ def app():
         st.session_state["current_page"] = "Quiz"
     if st.session_state["current_page"] == "Quiz":
         quiz_page()
- 
-# Seitenaufruf starten
-if __name__ == "__main__":
-    app()
+
+app()
