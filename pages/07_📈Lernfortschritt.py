@@ -29,6 +29,8 @@ image_url = "https://t4.ftcdn.net/jpg/02/97/58/59/240_F_297585980_nh0QEC16NB8eLP
 # Hintergrund setzen
 set_background_from_url(image_url)
 
+st.title("📈 Lernfortschritt")
+
 data_df = st.session_state['data_df']
 if data_df.empty:
     st.info('Keine Quiz-Daten vorhanden. Bitte machen Sie zuerst ein Quiz.')

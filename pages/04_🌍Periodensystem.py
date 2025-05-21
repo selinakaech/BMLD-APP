@@ -40,7 +40,7 @@ def load_elements():
 elements = load_elements()
 
 # Titel und Einführung mit Emojis
-st.title("🌍 Periodensystem der Elemente 🧪")
+st.title("🌍 Periodensystem der Elemente")
 st.write("Geben Sie das Elementsymbol ein (z. B. **H**, **O**, **Fe**), um mehr darüber zu erfahren:")
 
 # Eingabefeld für das Elementsymbol
