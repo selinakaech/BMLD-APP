@@ -31,7 +31,7 @@ image_url = "https://images.pexels.com/photos/10187632/pexels-photo-10187632.jpe
 set_background_from_url(image_url)
 
 # Titel und Einführung mit Emoji
-st.title("⚖️ Massenrechner")
+st.title("⚖️ Molmassenrechner")
 st.write(
     "Berechne die **Stoffmenge** aus der **Masse** und der **Molmasse**. "
     "Gib die Masse der Substanz und ihre Molmasse ein, um die Stoffmenge in Mol zu berechnen. 🔬"
