@@ -24,7 +24,7 @@ def set_background_from_url(image_url):
     )
  
 # Deine Bild-URL
-image_url = ""
+image_url = "https://i.pinimg.com/736x/87/ec/d4/87ecd42dac55f0fb960862b97b279f91.jpg"
  
 # Hintergrund setzen
 set_background_from_url(image_url)
