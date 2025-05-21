@@ -118,11 +118,3 @@ def quiz_page():
             progress["time_steps"] = []
             st.session_state["current_page"] = "Quiz"
             st.experimental_rerun()
-
-def app():
-    if "current_page" not in st.session_state:
-        st.session_state["current_page"] = "Quiz"
-    if st.session_state["current_page"] == "Quiz":
-        quiz_page()
-
-app()
