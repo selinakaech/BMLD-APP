@@ -79,7 +79,12 @@ else:
  
 # Ergebnisanzeige
 if fehlend:
-    st.success(f"🎉 **Ergebnis**: Die berechnete {fehlend} beträgt **{locals()[fehlend[0].lower()]:.3f} {einheit}**")
+    fehlend_map = {
+        "Konzentration": c,
+        "Volumen": V,
+        "Stoffmenge": n
+    }
+    st.success(f"🎉 **Ergebnis**: Die berechnete {fehlend} beträgt **{fehlend_map[fehlend]:.3f} {einheit}**")
     with st.expander("📊 Resultate Details"):
         st.write(f"**Stoffmenge (n):** {n:.3f} mol")
         st.write(f"**Volumen (V):** {V:.3f} L")
