@@ -59,7 +59,6 @@ if st.button("Eintrag speichern"):
         entry = f"{timestamp}\n{new_entry.strip()}\n\n"
         save_entry(entry)
         st.success("Eintrag wurde gespeichert!")
-        # Seite neu laden durch Manipulation von st.session_state
-        st.experimental_rerun()
+        st.experimental_rerun()  # Seite neu laden nach dem Speichern
     else:
         st.warning("Der Eintrag darf nicht leer sein.")
