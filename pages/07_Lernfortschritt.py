@@ -7,6 +7,28 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
+# Funktion, um den Hintergrund per Bild-URL zu setzen
+def set_background_from_url(image_url): 
+    st.markdown(
+        f"""
+<style>
+        .stApp {{
+            background-image: url("{image_url}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+</style>
+        """,
+        unsafe_allow_html=True
+    )
+ 
+# Deine Bild-URL
+image_url = ""
+ 
+# Hintergrund setzen
+set_background_from_url(image_url)
+
 data_df = st.session_state['data_df']
 if data_df.empty:
     st.info('Keine Quiz-Daten vorhanden. Bitte machen Sie zuerst ein Quiz.')

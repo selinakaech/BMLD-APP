@@ -7,6 +7,28 @@ import streamlit as st
 import random
 import pandas as pd
 
+# Funktion, um den Hintergrund per Bild-URL zu setzen
+def set_background_from_url(image_url): 
+    st.markdown(
+        f"""
+<style>
+        .stApp {{
+            background-image: url("{image_url}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+</style>
+        """,
+        unsafe_allow_html=True
+    )
+ 
+# Deine Bild-URL
+image_url = ""
+ 
+# Hintergrund setzen
+set_background_from_url(image_url)
+
 # Liste von 15 statischen Fragen und Antworten
 questions = [
     {"question": "Was ist die chemische Formel von Wasser?", "answer": "H2O"},
@@ -34,7 +56,6 @@ progress = {
     "time_steps": [],
 }
 
-# Quiz-Seite
 def quiz_page():
     st.title("📝 Quiz")
 

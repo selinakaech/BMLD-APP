@@ -55,7 +55,7 @@ if n > 0 and V > 0:
         st.write(f"**Volumen (V):** {V} L")
         st.write(f"**Konzentration (c):** {c:.2f} mol/L")
 else:
-    st.error("❗ Bitte stellen Sie sicher, dass sowohl die Stoffmenge als auch das Volumen größer als 0 sind.")
+    st.error("❗ Bitte stellen Sie sicher, dass sowohl die Stoffmenge als auch das Volumen grösser als 0 sind.")
 
 # Zusätzliche Tipps in einem Info-Fenster
 st.info(

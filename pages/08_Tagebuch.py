@@ -6,6 +6,28 @@ LoginManager().go_to_login('Start.py')
 import streamlit as st
 from datetime import datetime
 
+# Funktion, um den Hintergrund per Bild-URL zu setzen
+def set_background_from_url(image_url): 
+    st.markdown(
+        f"""
+<style>
+        .stApp {{
+            background-image: url("{image_url}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+        }}
+</style>
+        """,
+        unsafe_allow_html=True
+    )
+ 
+# Deine Bild-URL
+image_url = "https://images.pexels.com/photos/4238510/pexels-photo-4238510.jpeg?auto=compress&cs=tinysrgb&w=1200&lazy=load"
+ 
+# Hintergrund setzen
+set_background_from_url(image_url)
+
 # Funktion zum Laden der Einträge
 def load_entries():
     try:
