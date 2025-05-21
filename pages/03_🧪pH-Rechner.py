@@ -52,10 +52,3 @@ if c_h3o > 0:
     with st.expander("📊 Resultate Details"):
         st.write(f"**Konzentration [H₃O⁺]:** {c_h3o} mol/L")
         st.write(f"**Berechneter pH-Wert:** {ph:.2f}")
-else:
-    st.error("❗ Bitte geben Sie eine gültige Konzentration von H₃O⁺ (größer als 0) ein.")
-
-# Zusätzliche Tipps in einem Info-Fenster
-st.info(
-    "ℹ️ Tipp: Wenn Sie den pH-Wert für verschiedene Konzentrationen berechnen möchten, passen Sie einfach die Eingabewerte an."
-)
