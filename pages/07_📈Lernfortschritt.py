@@ -24,7 +24,7 @@ def set_background_from_url(image_url):
     )
  
 # Deine Bild-URL
-image_url = "https://lh3.googleusercontent.com/proxy/3xHRvI2Hhos5ab7mZpB-kJtUhSXTwBbmX26w9BOV03ORa0X5khbeeG2HwX71Kp8St9x0CU6ltb0myhcfd7VeNWwlA-wYQn8"
+image_url = "https://sdmntprukwest.oaiusercontent.com/files/00000000-3410-6243-9640-bec9766df2d0/raw?se=2025-05-21T13%3A28%3A20Z&sp=r&sv=2024-08-04&sr=b&scid=63850788-7171-568d-94ae-8f9a4a355b50&skoid=b32d65cd-c8f1-46fb-90df-c208671889d4&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2025-05-21T07%3A51%3A13Z&ske=2025-05-22T07%3A51%3A13Z&sks=b&skv=2024-08-04&sig=T%2BtbUh2QLlJp40BaTlua6vJWCvm8M%2BCH8kSAt6sPb14%3D"
 
 # Hintergrund setzen
 set_background_from_url(image_url)
