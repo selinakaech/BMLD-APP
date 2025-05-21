@@ -21,10 +21,10 @@ def set_background_from_url(image_url):
         """,
         unsafe_allow_html=True
     )
- 
+
 # Deine Bild-URL
 image_url = "https://images.pexels.com/photos/4238510/pexels-photo-4238510.jpeg?auto=compress&cs=tinysrgb&w=1200&lazy=load"
- 
+
 # Hintergrund setzen
 set_background_from_url(image_url)
 
@@ -41,28 +41,25 @@ def save_entry(entry):
     with open("tagebuch.txt", "a", encoding="utf-8") as file:
         file.write(entry)
 
-    st.title("📓 Tagebuch")
-    st.write("Hier kannst du deine Gedanken, Erkenntnisse oder Notizen festhalten.")
+# --- UI-Logik ---
+st.title("📓 Tagebuch")
+st.write("Hier kannst du deine Gedanken, Erkenntnisse oder Notizen festhalten.")
 
-    # Lade bestehende Einträge
-    entries = load_entries()
-    st.text_area("Einträge", entries, height=300, disabled=True)
+# Lade bestehende Einträge
+entries = load_entries()
+st.text_area("Einträge", entries, height=300, disabled=True)
 
-    # Eingabefeld für neuen Eintrag
-    new_entry = st.text_area("Neuer Eintrag", placeholder="Schreibe deinen Eintrag hier...")
+# Eingabefeld für neuen Eintrag
+new_entry = st.text_area("Neuer Eintrag", placeholder="Schreibe deinen Eintrag hier...")
 
-    # Button zum Speichern des neuen Eintrags
-    if st.button("Eintrag speichern"):
-        if new_entry.strip():
-            timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-            entry = f"{timestamp}\n{new_entry.strip()}\n\n"
-            save_entry(entry)
-            st.success("Eintrag wurde gespeichert!")
-            
-            # Seite neu laden durch Manipulation von st.session_state
-            if "reload" not in st.session_state:
-                st.session_state["reload"] = True
-            else:
-                st.session_state["reload"] = not st.session_state["reload"]
-        else:
-            st.warning("Der Eintrag darf nicht leer sein.")
+# Button zum Speichern des neuen Eintrags
+if st.button("Eintrag speichern"):
+    if new_entry.strip():
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        entry = f"{timestamp}\n{new_entry.strip()}\n\n"
+        save_entry(entry)
+        st.success("Eintrag wurde gespeichert!")
+        # Seite neu laden durch Manipulation von st.session_state
+        st.experimental_rerun()
+    else:
+        st.warning("Der Eintrag darf nicht leer sein.")
