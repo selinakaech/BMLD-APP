@@ -52,4 +52,4 @@ if c_h3o > 0:
         st.write(f"**Konzentration [H₃O⁺]:** {c_h3o} mol/L")
         st.write(f"**Berechneter pH-Wert:** {ph:.2f}")
 elif c_h3o == 0:
-    st.info("Bitte geben Sie eine Konzentration größer als 0 ein.")
+    st.info("Bitte geben Sie eine Konzentration grösser als 0 ein.")
