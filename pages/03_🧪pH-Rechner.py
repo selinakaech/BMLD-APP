@@ -29,27 +29,76 @@ image_url = "https://s.zentrum-der-gesundheit.de/img/ph-wert"
 set_background_from_url(image_url)
 
 # pH-Rechner Titel und Einführung mit Emoji
+import streamlit as st
+
+import math
+ 
 st.title("🧪 pH-Rechner")
-
+ 
 st.write(
-    "Berechne den **pH-Wert** einer Lösung basierend auf der **Konzentration von H₃O⁺**. "
-    "Gib einfach die Konzentration von H₃O⁺ in mol/L ein und erhalte den pH-Wert. 🔬"
-)
 
-# Eingabefeld für die Konzentration in einem ansprechenden Layout
-c_h3o = st.number_input(
-    "Konzentration [H₃O⁺] in mol/L", 
-    min_value=0.0, 
-    step=0.0001, 
-    help="Geben Sie die Konzentration von H₃O⁺ in mol/L ein."
-)
+    "Berechne entweder den **pH-Wert** aus der **H₃O⁺-Konzentration**, "
 
-# Berechnung und Ausgabe im Resultate-Fenster
-if c_h3o > 0:
-    ph = -math.log10(c_h3o)
-    st.success(f"🎉 **Ergebnis**: Der pH-Wert der Lösung beträgt: **{ph:.2f}**")
-    with st.expander("📊 Resultate Details"):
-        st.write(f"**Konzentration [H₃O⁺]:** {c_h3o} mol/L")
-        st.write(f"**Berechneter pH-Wert:** {ph:.2f}")
-elif c_h3o == 0:
-    st.info("Bitte geben Sie eine Konzentration grösser als 0 ein.")
+    "oder umgekehrt die Konzentration aus einem gegebenen pH-Wert. "
+
+    "Gib einfach einen der beiden Werte ein! 🔄"
+
+)
+ 
+# Eingabefelder
+
+col1, col2 = st.columns(2)
+ 
+with col1:
+
+    c_h3o_input = st.text_input("🔬 Konzentration [H₃O⁺] (mol/L)", help="z. B. 0.001")
+ 
+with col2:
+
+    ph_input = st.text_input("🧪 pH-Wert", help="z. B. 3.0")
+ 
+# Umwandlung in float
+
+def to_float(value):
+
+    try:
+
+        return float(value)
+
+    except:
+
+        return None
+ 
+c_h3o = to_float(c_h3o_input)
+
+ph = to_float(ph_input)
+ 
+# Berechnung
+
+if c_h3o is not None and ph is None:
+
+    if c_h3o > 0:
+        ph = -math.log10(c_h3o)
+        st.success(f"✅ Der berechnete **pH-Wert** beträgt: **{ph:.2f}**")
+        with st.expander("📊 Details"):
+            st.write(f"**Eingegebene Konzentration [H₃O⁺]:** {c_h3o:.4e} mol/L")
+            st.write(f"**Berechneter pH-Wert:** {ph:.2f}")
+    elif c_h3o == 0:
+        st.info("ℹ️ Eine Konzentration von 0 mol/L bedeutet, dass keine H₃O⁺-Ionen vorhanden sind. Der pH-Wert ist in diesem Fall nicht definiert.")
+elif ph is not None and c_h3o is None:
+    if ph >= 0:
+        c_h3o = 10 ** (-ph)
+
+        st.success(f"✅ Die berechnete **[H₃O⁺]-Konzentration** beträgt: **{c_h3o:.4e} mol/L**")
+
+        with st.expander("📊 Details"):
+            st.write(f"**Eingegebener pH-Wert:** {ph:.2f}")
+            st.write(f"**Berechnete Konzentration [H₃O⁺]:** {c_h3o:.4e} mol/L")
+    else:
+        st.error("❗ Der pH-Wert muss ≥ 0 sein.")
+elif ph is not None and c_h3o is not None:
+    st.warning("⚠️ Bitte geben Sie **nur einen** der beiden Werte ein – entweder den pH-Wert oder die H₃O⁺-Konzentration.")
+else:
+    st.info("ℹ️ Bitte geben Sie entweder den **pH-Wert** oder die **[H₃O⁺]-Konzentration** ein.")
+
+ 
