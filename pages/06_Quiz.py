@@ -103,7 +103,7 @@ if st.button("Antworten abschicken"):
     else:
         st.session_state['data_df'] = pd.DataFrame([result_simple])
 
-    st.success("Antworten gespeichert (Demo)")
+    st.success("Antworten gespeichert")
     st.write("Jetzt können Sie Ihre persönliche Entwicklung unter Lernfortschritt anzeigen lassen.")
 
     st.subheader("Antworten im Detail:")
