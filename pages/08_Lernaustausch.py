@@ -31,18 +31,18 @@ set_background_from_url(image_url)
 # Funktion zum Laden der Einträge
 def load_entries():
     try:
-        with open("tagebuch.txt", "r", encoding="utf-8") as file:
+        with open("lernaustausch.txt", "r", encoding="utf-8") as file:
             return file.read()
     except FileNotFoundError:
         return ""
 
 # Funktion zum Speichern eines neuen Eintrags
 def save_entry(entry):
-    with open("tagebuch.txt", "a", encoding="utf-8") as file:
+    with open("lernaustausch.txt", "a", encoding="utf-8") as file:
         file.write(entry)
 
 # --- UI-Logik ---
-st.title("📓 Tagebuch")
+st.title("📓 Lernaustausch")
 st.write("Hier kannst du deine Gedanken, Erkenntnisse oder Notizen festhalten.")
 
 # Lade bestehende Einträge
