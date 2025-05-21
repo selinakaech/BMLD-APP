@@ -23,7 +23,7 @@ def set_background_from_url(image_url):
     )
  
 # Deine Bild-URL
-image_url = ""
+image_url = "https://www.shutterstock.com/image-photo/buffer-solution-glass-chemical-laboratory-600nw-2215810923.jpg"
  
 # Hintergrund setzen
 set_background_from_url(image_url)

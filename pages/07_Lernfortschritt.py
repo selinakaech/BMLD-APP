@@ -24,7 +24,7 @@ def set_background_from_url(image_url):
     )
  
 # Deine Bild-URL
-image_url = ""
+image_url = "https://media.istockphoto.com/id/1328684915/de/vektor/lernfortschritt-und-buchlesen.jpg?s=612x612&w=0&k=20&c=lZ0lT0bfqIFtxOYN9cO2NtN0IC5qDbiuOPQU0XNV0mA="
  
 # Hintergrund setzen
 set_background_from_url(image_url)
