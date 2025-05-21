@@ -39,11 +39,6 @@ st.markdown("""
         list-style: none;
         padding-left: 0;
     }
-
-    ul li::before {
-        content: "🔹";
-        margin-right: 0.5em;
-    }
 </style>
 """, unsafe_allow_html=True)
 
@@ -85,33 +80,3 @@ data_manager.load_user_data(
     initial_value=pd.DataFrame()
     # parse_dates=['timestamp']  # Erst aktivieren, wenn die Spalte sicher existiert!
 )
-
-# Navigation
-st.markdown("<div style='padding: 1rem 0;'>", unsafe_allow_html=True)
-
-for name, modul in {
-    "⚙️ Einstellungen": "settings",
-    "🧪 Konzentrationen": "konzentrationen",
-    "⚖️ Massenrechner": "massenrechner",
-    "🔬 Periodensystem": "periodensystem",
-    "🧫 pH-Rechner": "ph_rechner",
-    "📋 Säure-Base-Tabelle": "saeure_base_tabelle",
-    "🧠 Quiz": "quiz",
-    "📈 Lernfortschritt": "lernfortschritt",
-    "📓 Tagebuch": "tagebuch"
-}.items():
-    if st.button(name, key=modul, help="Klicke, um das Modul zu öffnen", use_container_width=True):
-        st.session_state.seite = modul
-
-st.markdown("</div>", unsafe_allow_html=True)
-
-# Modul laden
-if st.session_state.seite:
-    modulname = f"pages.{st.session_state.seite}"
-    try:
-        seite = importlib.import_module(modulname)
-        st.success(f"✅ Modul '{modulname}' wurde geladen.")
-        if hasattr(seite, "app"):
-            seite.app()
-    except Exception as e:
-        st.error(f"💥 Fehler beim Laden von '{modulname}': {e}")

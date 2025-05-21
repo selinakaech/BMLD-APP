@@ -1,3 +1,8 @@
+# ====== Start Login Block ======
+from utils.login_manager import LoginManager
+LoginManager().go_to_login('Start.py') 
+# ====== End Login Block ======
+
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -15,7 +20,9 @@ if 'timestamp' in data_df.columns:
 st.dataframe(data_df)
 
 # Lernfortschritt berechnen und anzeigen
-if 'correct_answers' in data_df.columns and 'total_answers' in data_df.columns:
+if st.button("Lernfortschritt berechnen"):
+#if 'correct_answers' in data_df.columns and 'total_answers' in data_df.columns:
+  
     gesamt_richtig = data_df['correct_answers'].sum()
     gesamt_gesamt = data_df['total_answers'].sum()
     fortschritt = (gesamt_richtig / gesamt_gesamt) * 100 if gesamt_gesamt > 0 else 0
