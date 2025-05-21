@@ -24,7 +24,7 @@ def set_background_from_url(image_url):
     )
 
 # Deine Bild-URL
-image_url = "https://i.pinimg.com/736x/03/d7/2e/03d72e375cafb77f14ec3e61142e07d1.jpg"
+image_url = "https://img.freepik.com/vektoren-kostenlos/hintergrund-mit-fragezeichen_78370-2896.jpg?semt=ais_hybrid&w=740"
 
 # Hintergrund setzen
 set_background_from_url(image_url)
