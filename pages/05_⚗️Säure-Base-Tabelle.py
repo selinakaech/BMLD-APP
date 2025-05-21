@@ -37,7 +37,7 @@ st.write(
 
 # Eingabefelder für Säure und Base
 saure = st.text_input("🔴 Geben Sie eine Säure ein (z.B. HCl)")
-base = st.text_input("🔵 Geben Sie eine Base ein (z.B. NaOH)")
+base = st.text_input("🔵 Geben Sie eine Base ein (z.B. NH3)")
 
 # Tabelle mit pKs-Werten für gängige Säuren und Basen
 pKs_wert = {
