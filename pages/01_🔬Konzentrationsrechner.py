@@ -29,35 +29,62 @@ set_background_from_url(image_url)
 
 # Titel und Einführung mit Emoji
 st.title("🔬 Konzentrationsrechner")
-
+ 
 st.write(
-    "Willkommen beim **Konzentrationsrechner**! Berechne die Konzentration einer Lösung "
-    "mit Hilfe der Stoffmenge und des Volumens. Gib einfach die Werte ein und erhalte das Ergebnis! ✨"
+    "Willkommen beim **Konzentrationsrechner**! Gib zwei beliebige Werte ein – "
+    "**Stoffmenge (n)**, **Volumen (V)** oder **Konzentration (c)** – "
+    "und der fehlende Wert wird automatisch berechnet. ⚗️"
 )
-
-# Eingabefelder in einem ansprechenden Layout
-col1, col2 = st.columns(2)
-
+ 
+# Eingabefelder mit None als Platzhalter für leere Eingaben
+st.markdown("### 🔢 Eingabe der bekannten Werte:")
+ 
+col1, col2, col3 = st.columns(3)
+ 
 with col1:
-    n = st.number_input("⚗️ Stoffmenge (mol)", min_value=0.0, step=0.01, help="Geben Sie die Stoffmenge in Mol ein.")
-
+    n_input = st.text_input("⚗️ Stoffmenge (mol)", help="z. B. 0.5")
+ 
 with col2:
-    V = st.number_input("🌡️ Volumen (L)", min_value=0.0, step=0.01, help="Geben Sie das Volumen in Litern ein.")
-
-# Berechnung und Ausgabe im Resultate-Fenster
-if n > 0 and V > 0:
+    V_input = st.text_input("🌡️ Volumen (L)", help="z. B. 1.0")
+ 
+with col3:
+    c_input = st.text_input("🧪 Konzentration (mol/L)", help="z. B. 0.5")
+ 
+# Umwandlung von Eingaben in float (falls vorhanden)
+def to_float(val):
+    try:
+        return float(val)
+    except:
+        return None
+ 
+n = to_float(n_input)
+V = to_float(V_input)
+c = to_float(c_input)
+ 
+# Berechnungslogik
+if n is not None and V is not None and c is None:
     c = n / V
-    st.success(f"🎉 **Ergebnis**: Die Konzentration beträgt: **{c:.2f} mol/L**")
-
-    # Ergebnis-Details in einem "Resultate"-Fenster
-    with st.expander("📊 Resultate Details"):
-        st.write(f"**Stoffmenge (n):** {n} mol")
-        st.write(f"**Volumen (V):** {V} L")
-        st.write(f"**Konzentration (c):** {c:.2f} mol/L")
+    fehlend = "Konzentration"
+    einheit = "mol/L"
+elif n is not None and c is not None and V is None:
+    V = n / c
+    fehlend = "Volumen"
+    einheit = "L"
+elif V is not None and c is not None and n is None:
+    n = c * V
+    fehlend = "Stoffmenge"
+    einheit = "mol"
 else:
-    st.error("❗ Bitte stellen Sie sicher, dass sowohl die Stoffmenge als auch das Volumen grösser als 0 sind.")
-
-# Zusätzliche Tipps in einem Info-Fenster
-st.info(
-    "ℹ️ Tipp: Um die Konzentration in anderen Einheiten zu berechnen, passen Sie einfach die Eingabewerte an."
-)
+    fehlend = None
+ 
+# Ergebnisanzeige
+if fehlend:
+    st.success(f"🎉 **Ergebnis**: Die berechnete {fehlend} beträgt **{locals()[fehlend[0].lower()]:.3f} {einheit}**")
+    with st.expander("📊 Resultate Details"):
+        st.write(f"**Stoffmenge (n):** {n:.3f} mol")
+        st.write(f"**Volumen (V):** {V:.3f} L")
+        st.write(f"**Konzentration (c):** {c:.3f} mol/L")
+elif all(x is not None for x in [n, V, c]):
+    st.warning("⚠️ Bitte geben Sie **nur zwei** Werte ein, damit der dritte berechnet werden kann.")
+elif sum(x is not None for x in [n, V, c]) < 2:
+    st.info("ℹ️ Bitte geben Sie **zwei Werte** ein, um den dritten zu berechnen.")
