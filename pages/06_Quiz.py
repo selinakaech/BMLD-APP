@@ -22,10 +22,10 @@ def set_background_from_url(image_url):
         """,
         unsafe_allow_html=True
     )
- 
+
 # Deine Bild-URL
 image_url = "https://media.istockphoto.com/id/1428194995/de/vektor/ideenkonzept-mit-einzeiligen-gl%C3%BChbirnen-innovationsidee-prozess-des-entwirrens-von-draht-zur.jpg?s=612x612&w=0&k=20&c=ZSMqKXWhrqwXRtuPw0GgWpUyGV8rqGNDimb8g-KpuyQ="
- 
+
 # Hintergrund setzen
 set_background_from_url(image_url)
 
@@ -56,65 +56,64 @@ progress = {
     "time_steps": [],
 }
 
-def quiz_page():
-    st.title("📝 Quiz")
+st.title("📝 Quiz")
 
-    answers = {}
-    progress_data = []
+answers = {}
+progress_data = []
 
+for i, q in enumerate(questions, start=1):
+    st.text(f"{i}. {q['question']}")
+    answer = st.text_input(f"Antwort für Frage {i}", key=f"answer_{i}")
+    answers[i] = answer
+
+if st.button("Antworten abschicken"):
     for i, q in enumerate(questions, start=1):
-        st.text(f"{i}. {q['question']}")
-        answer = st.text_input(f"Antwort für Frage {i}", key=f"answer_{i}")
-        answers[i] = answer
+        correct = "Richtig" if answers[i].lower() == q["answer"].lower() else "Falsch"
+        st.write(f"Frage {i}: {correct} (Ihre Antwort: {answers[i]})")
 
-    if st.button("Antworten abschicken"):
-        for i, q in enumerate(questions, start=1):
-            correct = "Richtig" if answers[i].lower() == q["answer"].lower() else "Falsch"
-            st.write(f"Frage {i}: {correct} (Ihre Antwort: {answers[i]})")
+        if correct == "Richtig":
+            progress["correct_answers"] += 1
+        progress["total_answers"] += 1
 
-            if correct == "Richtig":
-                progress["correct_answers"] += 1
-            progress["total_answers"] += 1
+        progress_percentage = (progress["correct_answers"] / progress["total_answers"]) * 100 if progress["total_answers"] > 0 else 0
+        progress_data.append(progress_percentage)
+        progress["answers_detail"].append({
+            "Frage": q["question"],
+            "Ihre Antwort": answers[i],
+            "Status": correct
+        })
 
-            progress_percentage = (progress["correct_answers"] / progress["total_answers"]) * 100 if progress["total_answers"] > 0 else 0
-            progress_data.append(progress_percentage)
-            progress["answers_detail"].append({
-                "Frage": q["question"],
-                "Ihre Antwort": answers[i],
-                "Status": correct
-            })
+    result = {
+        "correct_answers": progress["correct_answers"],
+        "total_answers": progress["total_answers"],
+        "answers_detail": progress["answers_detail"],
+    }
+    from utils.data_manager import DataManager
+    DataManager().append_record(session_state_key='data_df', record_dict=result)
 
-        result = {
-            "correct_answers": progress["correct_answers"],
-            "total_answers": progress["total_answers"],
-            "answers_detail": progress["answers_detail"],
-        }
-        from utils.data_manager import DataManager
-        DataManager().append_record(session_state_key='data_df', record_dict=result)
+    # Session State direkt aktualisieren (Lösung)
+    # Nur einfache Werte für den Lernfortschritt speichern!
+    result_simple = {
+        "correct_answers": progress["correct_answers"],
+        "total_answers": progress["total_answers"],
+        "timestamp": pd.Timestamp.now()
+    }
+    if 'data_df' in st.session_state and not st.session_state['data_df'].empty:
+        st.session_state['data_df'] = pd.concat([st.session_state['data_df'], pd.DataFrame([result_simple])], ignore_index=True)
+    else:
+        st.session_state['data_df'] = pd.DataFrame([result_simple])
 
-        # Session State direkt aktualisieren (Lösung)
-        # Nur einfache Werte für den Lernfortschritt speichern!
-        result_simple = {
-            "correct_answers": progress["correct_answers"],
-            "total_answers": progress["total_answers"],
-            "timestamp": pd.Timestamp.now()
-        }
-        if 'data_df' in st.session_state and not st.session_state['data_df'].empty:
-            st.session_state['data_df'] = pd.concat([st.session_state['data_df'], pd.DataFrame([result_simple])], ignore_index=True)
-        else:
-            st.session_state['data_df'] = pd.DataFrame([result_simple])
+    st.success("Antworten gespeichert (Demo)")
+    st.write("Jetzt können Sie Ihre persönliche Entwicklung unter Lernfortschritt anzeigen lassen.")
 
-        st.success("Antworten gespeichert (Demo)")
-        st.write("Jetzt können Sie Ihre persönliche Entwicklung unter Lernfortschritt anzeigen lassen.")
+    st.subheader("Antworten im Detail:")
+    answers_df = pd.DataFrame(progress["answers_detail"])
+    st.dataframe(answers_df)
 
-        st.subheader("Antworten im Detail:")
-        answers_df = pd.DataFrame(progress["answers_detail"])
-        st.dataframe(answers_df)
-
-        if st.button("Quiz wiederholen"):
-            progress["correct_answers"] = 0
-            progress["total_answers"] = 0
-            progress["answers_detail"] = []
-            progress["time_steps"] = []
-            st.session_state["current_page"] = "Quiz"
-            st.experimental_rerun()
+    if st.button("Quiz wiederholen"):
+        progress["correct_answers"] = 0
+        progress["total_answers"] = 0
+        progress["answers_detail"] = []
+        progress["time_steps"] = []
+        st.session_state["current_page"] = "Quiz"
+        st.rerun()
