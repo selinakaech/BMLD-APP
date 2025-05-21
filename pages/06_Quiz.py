@@ -35,16 +35,16 @@ questions = [
     {"question": "Welches Element hat das Symbol H?", "answer": "Wasserstoff"},
     {"question": "Welches Element hat das Symbol O?", "answer": "Sauerstoff"},
     {"question": "Wie viele Protonen hat ein Wasserstoffatom?", "answer": "1"},
-    {"question": "Welches Gas atmen Menschen ein?", "answer": "Sauerstoff"},
+    {"question": "Was ist die chemische Formel von Kohlendioxid?", "answer": "CO2"},
     {"question": "Was ist der pH-Wert von reinem Wasser?", "answer": "7"},
     {"question": "Welches Element hat das Symbol Na?", "answer": "Natrium"},
     {"question": "Was ist der Aggregatzustand von Eis bei Raumtemperatur?", "answer": "fest"},
     {"question": "Was ist der Aggregatzustand von Sauerstoff bei Raumtemperatur?", "answer": "gasförmig"},
-    {"question": "Wie viele Elemente gibt es im Periodensystem?", "answer": "118"},
-    {"question": "Was ist die chemische Formel von Salz?", "answer": "NaCl"},
+    {"question": "Wie lautet die Ordnungszahl von Sauerstoff?", "answer": "8"},
+    {"question": "Was ist die chemische Formel von Kochsalz?", "answer": "NaCl"},
     {"question": "Wie nennt man das Element mit der Ordnungszahl 1?", "answer": "Wasserstoff"},
     {"question": "Was ist der pKs-Wert von Salzsäure?", "answer": "-6"},
-    {"question": "Was ist die Farbe von Kupfer?", "answer": "rotbraun"},
+    {"question": "Welche Farbe hat Schwefel in Reinform?", "answer": "gelb"},
     {"question": "Welches Element hat das Symbol He?", "answer": "Helium"}
 ]
 
