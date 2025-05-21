@@ -33,8 +33,7 @@ set_background_from_url(image_url)
 # Titel und Einführung mit Emoji
 st.title("⚖️ Molmassenrechner")
 st.write(
-    "Berechne die **Stoffmenge** aus der **Masse** und der **Molmasse**. "
-    "Gib die Masse der Substanz und ihre Molmasse ein, um die Stoffmenge in Mol zu berechnen. 🔬"
+    "Gib die chemische Formel (z.B. H₂O) und die gewünschte Menge ein - der Rechner berechnet die entsprechende Masse für dich. ⚗️"
 )
 
 with st.form(key='element_form'):
