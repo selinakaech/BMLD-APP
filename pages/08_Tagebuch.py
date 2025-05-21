@@ -41,8 +41,6 @@ def save_entry(entry):
     with open("tagebuch.txt", "a", encoding="utf-8") as file:
         file.write(entry)
 
-# Funktion zum Rendern der Tagebuch-Seite
-def app():
     st.title("📓 Tagebuch")
     st.write("Hier kannst du deine Gedanken, Erkenntnisse oder Notizen festhalten.")
 
