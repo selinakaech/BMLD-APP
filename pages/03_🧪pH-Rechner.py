@@ -45,9 +45,11 @@ c_h3o = st.number_input(
 )
 
 # Berechnung und Ausgabe im Resultate-Fenster
-ph = -math.log10(c_h3o)
-st.success(f"🎉 **Ergebnis**: Der pH-Wert der Lösung beträgt: **{ph:.2f}**")
-    # Ergebnis-Details in einem "Resultate"-Fenster
-with st.expander("📊 Resultate Details"):
+if c_h3o > 0:
+    ph = -math.log10(c_h3o)
+    st.success(f"🎉 **Ergebnis**: Der pH-Wert der Lösung beträgt: **{ph:.2f}**")
+    with st.expander("📊 Resultate Details"):
         st.write(f"**Konzentration [H₃O⁺]:** {c_h3o} mol/L")
         st.write(f"**Berechneter pH-Wert:** {ph:.2f}")
+elif c_h3o == 0:
+    st.info("Bitte geben Sie eine Konzentration größer als 0 ein.")
