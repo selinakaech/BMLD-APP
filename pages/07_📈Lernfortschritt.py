@@ -24,7 +24,7 @@ def set_background_from_url(image_url):
     )
  
 # Deine Bild-URL
-image_url = "https://i.pinimg.com/736x/bb/09/cf/bb09cf29964707074faa1b7ac14e1b71.jpg"
+image_url = "https://www.sabinejokischlernstraat.com/wp-content/uploads/2023/07/strategisch-lernen.webp"
 
 # Hintergrund setzen
 set_background_from_url(image_url)
