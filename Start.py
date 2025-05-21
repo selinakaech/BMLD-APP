@@ -17,29 +17,7 @@ st.markdown("""
         background-position: center;
         font-family: 'Inter', sans-serif;
     }
-
-    .dashboard-card {
-        font-size: 3rem;
-        padding: 3rem;
-        margin-bottom: 1rem;
-        text-align: center;
-        background-color: #ffffffdd;
-        border-radius: 1rem;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        transition: transform 0.2s ease-in-out;
-        font-weight: bold;
-    }
-
-    .dashboard-card:hover {
-        transform: scale(1.05);
-        background-color: #e0f7ff;
-    }
-
-    ul {
-        list-style: none;
-        padding-left: 0;
-    }
-</style>
+    
 """, unsafe_allow_html=True)
 
 # --- Einführungstext ---
@@ -65,18 +43,14 @@ Kontakt: gfrersor@students.zhaw.ch, heebadr1@students.zhaw.ch, kaechsel@students
 </div>
 """, unsafe_allow_html=True)
 
-# Initialisierung
-if "seite" not in st.session_state:
-    st.session_state.seite = None
-
 data_manager = DataManager(fs_protocol='webdav', fs_root_folder="BMLD_Daten")
 login_manager = LoginManager(data_manager)
 login_manager.login_register()
 
-# Korrigierter Ladevorgang ohne parse_dates (um Fehler zu vermeiden, falls timestamp noch nicht existiert)
+# Korrigierter Ladevorgang: Komma ergänzt, parse_dates auskommentiert (erst aktivieren, wenn Spalte existiert!)
 data_manager.load_user_data(
     session_state_key='data_df',
     file_name='data.csv',
     initial_value=pd.DataFrame()
-    # parse_dates=['timestamp']  # Erst aktivieren, wenn die Spalte sicher existiert!
+    # ,parse_dates=['timestamp']   # erst aktivieren, wenn die Spalte sicher existiert!
 )
