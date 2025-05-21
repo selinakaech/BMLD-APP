@@ -56,7 +56,8 @@ new_entry = st.text_area("Neuer Eintrag", placeholder="Schreibe deinen Eintrag h
 if st.button("Eintrag speichern"):
     if new_entry.strip():
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-        entry = f"{timestamp}\n{new_entry.strip()}\n\n"
+        username = st.session_state.get("username", "Unbekannt")
+        entry = f"{timestamp} - {username}\n{new_entry.strip()}\n\n"
         save_entry(entry)
         st.success("Eintrag wurde gespeichert!")
         st.rerun()  # Seite neu laden nach dem Speichern
