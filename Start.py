@@ -80,7 +80,7 @@ try:
     # Logo in der Sidebar einfügen
     st.sidebar.markdown(
         f"""
-        <div style="text-align: center; padding: 5px 0 30px 0;"> <!-- Oben: 5px, Unten: 30px -->
+        <div style="text-align: center; padding: 0px 0 25px 0;"> <!-- Oben: 5px, Unten: 30px -->
             <img src="data:image/png;base64,{logo_base64}" alt="Logo" style="width: 150px;">
         </div>
         """,
