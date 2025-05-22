@@ -5,57 +5,38 @@ LoginManager().go_to_login('Start.py')
 
 import streamlit as st
 
-def set_background_from_url():
+# Funktion, um den Hintergrund per Bild-URL zu setzen
+def set_background_from_url(image_url): 
     st.markdown(
-        """
+        f"""
 <style>
-/* Hintergrundbild */
-.stApp {
-    background-image: url("https://images.pexels.com/photos/7722796/pexels-photo-7722796.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-}
-
-/* Scrollfreundliches Overlay */
-.stApp::before {
-    content: "";
-    position: absolute;  /* statt fixed */
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(255, 255, 255, 0.6);
-    z-index: 0;
-    pointer-events: none;  /* Scrollen und Klicken bleibt möglich */
-}
-
-/* Inhalt darüber legen */
-.stApp > * {
-    position: relative;
-    z-index: 1;
-}
-
-/* Textschatten für bessere Lesbarkeit */
-h1, h2, h3, h4, h5, p, label, .stTextInput label {
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-}
-
-/* Heller Inhaltscontainer */
-section.main > div {
-    background-color: rgba(255, 255, 255, 0.85);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-}
+        .stApp {{
+            background-image: url("{image_url}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+        }}
+        .stApp::before {{
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.7); /* Weiß mit 70% Transparenz */
+            z-index: -1;
+        }}
 </style>
         """,
         unsafe_allow_html=True
     )
-
-# Setze den Hintergrund
-set_background_from_url()
+ 
+# Deine Bild-URL
+image_url = "https://images.pexels.com/photos/7722796/pexels-photo-7722796.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
+ 
+# Hintergrund setzen
+set_background_from_url(image_url)
 
 
 
