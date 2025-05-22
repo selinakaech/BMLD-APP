@@ -26,7 +26,7 @@ def set_background_from_url():
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.6);
+    background-color: rgba(255, 255, 255, 0.8);
     z-index: -1; /* Macht das Overlay hinter dem Inhalt sichtbar */
     pointer-events: none; /* Verhindert Scroll-/Klick-Blockierung */
 }
