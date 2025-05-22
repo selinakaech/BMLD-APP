@@ -61,3 +61,15 @@ data_manager.load_user_data(
     initial_value = pd.DataFrame(), 
     parse_dates = ['timestamp']
     )
+
+# Logo in der Sidebar einfügen
+sidebar_logo_path = "docs\Images\Logo Labmate.png"  # Lokaler Pfad zum Bild
+
+st.sidebar.markdown(
+    f"""
+    <div style="position: fixed; bottom: 0; width: 100%; text-align: center; padding: 10px 0;">
+        <img src="data:image/png;base64,{st.file_uploader}" alt="Logo" style="width: 150px;">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
