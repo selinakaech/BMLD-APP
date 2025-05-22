@@ -74,13 +74,16 @@ def get_base64_image(image_path):
 # Lokaler Pfad zum Bild
 sidebar_logo_path = "docs/Images/Logo Labmate.png"  # Passe den Pfad an, falls nötig
 
+# Lokaler Pfad zum Bild
+sidebar_logo_path = "docs/Images/Logo Labmate.png"  # Passe den Pfad an, falls nötig
+
 # Fehlerbehandlung für das Laden des Bildes
 try:
     logo_base64 = get_base64_image(sidebar_logo_path)
     # Logo in der Sidebar einfügen
     st.sidebar.markdown(
         f"""
-        <div style="text-align: center; padding: 0px 0 25px 0;"> <!-- Oben: 5px, Unten: 30px -->
+        <div style="text-align: center; padding: 10px 0;">
             <img src="data:image/png;base64,{logo_base64}" alt="Logo" style="width: 150px;">
         </div>
         """,
@@ -88,3 +91,4 @@ try:
     )
 except FileNotFoundError:
     st.sidebar.error("Das Logo wurde nicht gefunden. Überprüfe den Pfad.")
+   
