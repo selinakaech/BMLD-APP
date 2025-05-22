@@ -39,7 +39,6 @@ st.sidebar.markdown(
     """,
     unsafe_allow_html=True
 )
-# Sidebar-Layout    
 
 
 
@@ -78,3 +77,25 @@ data_manager.load_user_data(
     parse_dates = ['timestamp']
     )
 
+# Funktion, um ein Bild in Base64 zu konvertieren
+def get_base64_image(image_path):
+    with open(image_path, "rb") as img_file:
+        return base64.b64encode(img_file.read()).decode("utf-8")
+
+# Lokaler Pfad zum Bild
+sidebar_logo_path = "docs/Images/Logo Labmate.png"  # Passe den Pfad an, falls nötig
+
+# Fehlerbehandlung für das Laden des Bildes
+try:
+    logo_base64 = get_base64_image(sidebar_logo_path)
+    # Logo in der Sidebar einfügen
+    st.sidebar.markdown(
+        f"""
+        <div style="text-align: center; padding: 10px 0;">
+            <img src="data:image/png;base64,{logo_base64}" alt="Logo" style="width: 150px;">
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+except FileNotFoundError:
+    st.sidebar.error("Das Logo wurde nicht gefunden. Überprüfe den Pfad.")
