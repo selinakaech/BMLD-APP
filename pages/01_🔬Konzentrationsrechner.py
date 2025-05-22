@@ -11,21 +11,11 @@ def set_background_from_url(image_url):
         f"""
 <style>
         .stApp {{
-            background-image: url("{image_url}");
+            background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), 
+                              url("{image_url}");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
-            position: relative;
-        }}
-        .stApp::before {{
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.7); /* Weiß mit 70% Transparenz */
-            z-index: -1;
         }}
 </style>
         """,
