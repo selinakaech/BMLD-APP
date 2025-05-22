@@ -99,6 +99,7 @@ elif all(x is not None for x in [n, V, c]):
 elif sum(x is not None for x in [n, V, c]) < 2:
     st.info("ℹ️ Bitte geben Sie **zwei Werte** ein, um den dritten zu berechnen.")
 
+# Einfügen des Logos in die Sidebar
 # Funktion, um ein Bild in Base64 zu konvertieren
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:

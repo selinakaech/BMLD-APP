@@ -50,7 +50,7 @@ if submit_button:
         if 'error' not in result:
             st.write(f'Die Molmasse der Verbindung {compound} multipliziert mit {multiplier} ist {result["molar_mass"]} g/mol.')
 
-
+# Einfügen des Logos in die Sidebar
 # Funktion, um ein Bild in Base64 zu konvertieren
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:

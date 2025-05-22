@@ -67,6 +67,7 @@ if st.button("Eintrag speichern"):
     else:
         st.warning("Der Eintrag darf nicht leer sein.")
 
+# Einfügen des Logos in die Sidebar
 # Funktion, um ein Bild in Base64 zu konvertieren
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:

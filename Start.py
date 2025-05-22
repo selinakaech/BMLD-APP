@@ -65,7 +65,7 @@ data_manager.load_user_data(
     )
 
 
-
+# Einfügen des Logos in die Sidebar
 # Funktion, um ein Bild in Base64 zu konvertieren
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:

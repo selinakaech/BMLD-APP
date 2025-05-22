@@ -121,6 +121,19 @@ if st.button("Antworten abschicken"):
         st.session_state["current_page"] = "Quiz"
         st.rerun()
 
+# Feedback basierend auf der Anzahl richtiger Antworten
+if progress["correct_answers"] == progress["total_answers"]:
+    st.success("🎉 Perfekt! Du hast alle Fragen richtig beantwortet. Großartige Arbeit!")
+elif progress["correct_answers"] >= progress["total_answers"] * 0.8:
+    st.info("👍 Sehr gut! Du hast die meisten Fragen richtig beantwortet. Weiter so!")
+elif progress["correct_answers"] >= progress["total_answers"] * 0.5:
+    st.warning("🙂 Nicht schlecht! Du hast mehr als die Hälfte richtig. Übung macht den Meister!")
+else:
+    st.error("😅 Das war wohl nicht dein Tag. Versuch es nochmal, du schaffst das!")
+
+
+
+# Einfügen des Logos in die Sidebar
 # Funktion, um ein Bild in Base64 zu konvertieren
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:

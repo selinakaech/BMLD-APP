@@ -104,6 +104,7 @@ elif ph is not None and c_h3o is not None:
 else:
     st.info("ℹ️ Bitte geben Sie entweder den **pH-Wert** oder die **[H₃O⁺]-Konzentration** ein.")
 
+# Einfügen des Logos in die Sidebar
  # Funktion, um ein Bild in Base64 zu konvertieren
 def get_base64_image(image_path):
     with open(image_path, "rb") as img_file:
