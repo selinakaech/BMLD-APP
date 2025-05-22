@@ -5,50 +5,29 @@ LoginManager().go_to_login('Start.py')
 
 import streamlit as st
 
-def set_background_with_overlay():
-    st.markdown("""
-        <style>
-        html, body, [data-testid="stAppViewContainer"] {
-            background: url("https://images.pexels.com/photos/7722796/pexels-photo-7722796.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2") no-repeat center center fixed;
-            background-size: cover;
-        }
+# Funktion, um den Hintergrund per Bild-URL mit Overlay zu setzen
+def set_background_from_url(image_url): 
+    st.markdown(
+        f"""
+<style>
+    .stApp {{
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), 
+                    url("{image_url}");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }}
+</style>
+        """,
+        unsafe_allow_html=True
+    )
 
-        /* Heller Overlay-Effekt oben drüber */
-        [data-testid="stAppViewContainer"]::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.6);  /* Weiß mit Transparenz */
-            z-index: 0;
-            pointer-events: none;
-        }
+# Deine Bild-URL
+image_url = "https://images.pexels.com/photos/7722796/pexels-photo-7722796.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
 
-        /* Inhalte über das Overlay legen */
-        .stApp {
-            position: relative;
-            z-index: 1;
-        }
+# Hintergrund setzen
+set_background_from_url(image_url)
 
-        /* Optional: Textschatten für bessere Lesbarkeit */
-        h1, h2, h3, h4, h5, p, label, .stTextInput label {
-            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Optional: Heller Container */
-        section.main > div {
-            background-color: rgba(255, 255, 255, 0.85);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-        </style>
-    """, unsafe_allow_html=True)
-
-# Setze den Hintergrund mit Overlay
-set_background_with_overlay()
 
 
 # Titel und Einführung mit Emoji
