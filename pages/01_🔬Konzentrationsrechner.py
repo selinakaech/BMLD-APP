@@ -6,47 +6,53 @@ LoginManager().go_to_login('Start.py')
 import streamlit as st
 
 def set_background_from_url():
-    st.markdown("""
-        <style>
-        /* Hintergrundbild global setzen */
-        html, body {
-            background: url("https://images.pexels.com/photos/7722796/pexels-photo-7722796.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2") no-repeat center center fixed;
-            background-size: cover;
-        }
+    st.markdown(
+        """
+<style>
+/* Hintergrundbild */
+.stApp {
+    background-image: url("https://images.pexels.com/photos/7722796/pexels-photo-7722796.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
 
-        /* Overlay über Streamlit-Container */
-        [data-testid="stAppViewContainer"]::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(255, 255, 255, 0.75);  /* Weißer Schleier */
-            z-index: 0;
-            pointer-events: none;
-        }
+/* Scrollfreundliches Overlay */
+.stApp::before {
+    content: "";
+    position: absolute;  /* statt fixed */
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.6);
+    z-index: 0;
+    pointer-events: none;  /* Scrollen und Klicken bleibt möglich */
+}
 
-        /* Alle Inhalte darüber sichtbar */
-        .stApp {
-            position: relative;
-            z-index: 1;
-        }
+/* Inhalt darüber legen */
+.stApp > * {
+    position: relative;
+    z-index: 1;
+}
 
-        /* Lesbarer Text */
-        h1, h2, h3, h4, h5, p, label, .stTextInput label {
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-        }
+/* Textschatten für bessere Lesbarkeit */
+h1, h2, h3, h4, h5, p, label, .stTextInput label {
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+}
 
-        /* Optional: abgerundeter Container */
-        section.main > div {
-            background-color: rgba(255, 255, 255, 0.85);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.1);
-        }
-        </style>
-    """, unsafe_allow_html=True)
+/* Heller Inhaltscontainer */
+section.main > div {
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+}
+</style>
+        """,
+        unsafe_allow_html=True
+    )
 
 # Setze den Hintergrund
 set_background_from_url()
