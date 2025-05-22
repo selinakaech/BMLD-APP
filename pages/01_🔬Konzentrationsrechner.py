@@ -11,7 +11,7 @@ def set_background_from_url(image_url):
         f"""
 <style>
         .stApp {{
-            background-image: linear-gradient(rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.6)), 
+            background-image: linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.5)), 
                               url("{image_url}");
             background-size: cover;
             background-repeat: no-repeat;
