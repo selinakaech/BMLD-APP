@@ -18,7 +18,7 @@ def set_background_from_url():
     background-position: center;
 }
 
-/* Overlay für bessere Lesbarkeit */
+/* Helles Overlay – fast vollständig */
 .stApp::before {
     content: "";
     position: fixed;
@@ -26,19 +26,19 @@ def set_background_from_url():
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.9);
-    z-index: -1; /* Macht das Overlay hinter dem Inhalt sichtbar */
-    pointer-events: none; /* Verhindert Scroll-/Klick-Blockierung */
+    background-color: rgba(255, 255, 255, 0.9);  /* <== hier wird das Bild fast ausgeblendet */
+    z-index: -1;
+    pointer-events: none;
 }
 
 /* Textlesbarkeit verbessern */
 h1, h2, h3, h4, h5, p, label, .stTextInput label {
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 /* Optional: Heller Inhaltscontainer */
 section.main > div {
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.85);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
@@ -48,8 +48,9 @@ section.main > div {
         unsafe_allow_html=True
     )
 
-# Setze den Hintergrund
+# Aufruf
 set_background_from_url()
+
 
 
 # Titel und Einführung mit Emoji
