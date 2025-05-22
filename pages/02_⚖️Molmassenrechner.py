@@ -14,10 +14,12 @@ def set_background_from_url(image_url):
         f"""
 <style>
         .stApp {{
-            background-image: url("{image_url}");
+            background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), 
+                              url("{image_url}");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
+            background-position: top; /* Verschiebt das Bild nach oben */
         }}
 </style>
         """,

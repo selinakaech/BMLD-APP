@@ -13,16 +13,18 @@ def set_background_from_url(image_url):
         f"""
 <style>
         .stApp {{
-            background-image: url("{image_url}");
+            background-image: linear-gradient(rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0.4)), 
+                              url("{image_url}");
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
+            background-position: top; /* Verschiebt das Bild nach oben */
         }}
 </style>
         """,
         unsafe_allow_html=True
     )
-
+    
 # KORREKTE Bild-URL (ohne Zeilenumbruch und Textreste)
 image_url = "https://images.unsplash.com/photo-1628864005140-7770b9b8e7dd?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
 
