@@ -26,7 +26,7 @@ def set_background_from_url():
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.9);
     z-index: -1; /* Macht das Overlay hinter dem Inhalt sichtbar */
     pointer-events: none; /* Verhindert Scroll-/Klick-Blockierung */
 }
@@ -38,7 +38,7 @@ h1, h2, h3, h4, h5, p, label, .stTextInput label {
 
 /* Optional: Heller Inhaltscontainer */
 section.main > div {
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: rgba(255, 255, 255, 0.9);
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 0 20px rgba(0,0,0,0.1);
