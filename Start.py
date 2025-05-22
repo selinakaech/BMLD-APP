@@ -28,29 +28,20 @@ image_url = "https://www.lebensmittelverband.de/fileadmin/_processed_/a/4/csm_Ad
 # Hintergrund setzen
 set_background_from_url(image_url)
 
-# --- Sidebar ---
-# Funktion, um ein Bild in Base64 zu konvertieren
-def get_base64_image(image_path):
-    with open(image_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode("utf-8")
+# Bild oder Logo in der Sidebar einfügen
+sidebar_logo_path = "docs\Images\Logo Labmate.png"  # Lokaler Pfad zum Bild
 
-# Lokaler Pfad zum Bild
-sidebar_logo_path = "docs/Images/Logo Labmate.png"  # Passe den Pfad an, falls nötig
+st.sidebar.markdown(
+    f"""
+    <div style="position: fixed; bottom: 0; width: 100%; text-align: center; padding: 10px 0;">
+        <img src="data:image/png;base64,{st.file_uploader}" alt="Logo" style="width: 150px;">
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+# Sidebar-Layout    
 
-# Fehlerbehandlung für das Laden des Bildes
-try:
-    logo_base64 = get_base64_image(sidebar_logo_path)
-    # Logo in der Sidebar einfügen
-    st.sidebar.markdown(
-        f"""
-        <div style="position: fixed; bottom: 0; width: 100%; text-align: center; padding: 10px 0;">
-            <img src="data:image/png;base64,{logo_base64}" alt="Logo" style="width: 150px;">
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-except FileNotFoundError:
-    st.sidebar.error("Das Logo wurde nicht gefunden. Überprüfe den Pfad.")
+
 
 # --- Einführungstext ---
 st.markdown("""
