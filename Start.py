@@ -92,27 +92,3 @@ try:
 except FileNotFoundError:
     st.sidebar.error("Das Logo wurde nicht gefunden. Überprüfe den Pfad.")
 
-# Bild anzeigen
-# Funktion, um ein Bild in Base64 zu konvertieren
-def get_base64_image(image_path):
-    with open(image_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode("utf-8")
-
-# Lokaler Pfad zum Bild
-logo_path = "docs/Images/Logo Labmate.png"  # Passe den Pfad an, falls nötig
-
-# Fehlerbehandlung für das Laden des Bildes
-try:
-    logo_base64 = get_base64_image(logo_path)
-    # Logo oben rechts einfügen
-    st.markdown(
-        f"""
-        <div style="position: absolute; top: 10px; right: 10px; z-index: 1000;">
-            <img src="data:image/png;base64,{logo_base64}" alt="Logo" style="width: 100px;">
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-except FileNotFoundError:
-    st.error("Das Logo wurde nicht gefunden. Überprüfe den Pfad.")
-   
