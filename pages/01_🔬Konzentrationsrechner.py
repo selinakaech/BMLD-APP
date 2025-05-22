@@ -5,51 +5,51 @@ LoginManager().go_to_login('Start.py')
 
 import streamlit as st
 
-def set_background_from_url():
-    st.markdown(
-        """
-<style>
-/* Hintergrundbild */
-.stApp {
-    background-image: url("https://images.pexels.com/photos/7722796/pexels-photo-7722796.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-}
+def set_background_with_transparency():
+    st.markdown("""
+    <style>
+    /* Bild auf HTML und Body anwenden */
+    html, body {
+        background: url("https://images.pexels.com/photos/7722796/pexels-photo-7722796.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2") no-repeat center center fixed;
+        background-size: cover;
+    }
 
-/* Helles Overlay – fast vollständig */
-.stApp::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.9);  /* <== hier wird das Bild fast ausgeblendet */
-    z-index: -1;
-    pointer-events: none;
-}
+    /* Overlay über das Haupt-Container-Element */
+    [data-testid="stAppViewContainer"]::before {
+        content: "";
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(255,255,255,0.92);  /* Bild nur noch sehr schwach sichtbar */
+        z-index: 0;
+        pointer-events: none;
+    }
 
-/* Textlesbarkeit verbessern */
-h1, h2, h3, h4, h5, p, label, .stTextInput label {
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
-}
+    /* Inhalt über dem Overlay sichtbar */
+    .stApp {
+        position: relative;
+        z-index: 1;
+    }
 
-/* Optional: Heller Inhaltscontainer */
-section.main > div {
-    background-color: rgba(255, 255, 255, 0.85);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-}
-</style>
-        """,
-        unsafe_allow_html=True
-    )
+    /* Optional: Textlesbarkeit */
+    h1, h2, h3, h4, h5, p, label {
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+    }
 
-# Aufruf
-set_background_from_url()
+    /* Optional: Heller Bereich */
+    section.main > div {
+        background-color: rgba(255,255,255,0.85);
+        padding: 2rem;
+        border-radius: 12px;
+        box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+# Hintergrundbild mit Transparenz setzen
+set_background_with_transparency()
 
 
 
