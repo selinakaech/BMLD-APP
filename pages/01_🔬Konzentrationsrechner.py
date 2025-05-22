@@ -5,55 +5,50 @@ LoginManager().go_to_login('Start.py')
 
 import streamlit as st
 
-def set_background_from_url():
-    st.markdown(
-        """
-<style>
-/* Hintergrundbild auf stApp setzen */
-.stApp {
-    background-image: url("https://images.pexels.com/photos/7722796/pexels-photo-7722796.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2");
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    background-position: center;
-    position: relative;
-}
+def set_background_with_overlay():
+    st.markdown("""
+        <style>
+        html, body, [data-testid="stAppViewContainer"] {
+            background: url("https://images.pexels.com/photos/7722796/pexels-photo-7722796.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2") no-repeat center center fixed;
+            background-size: cover;
+        }
 
-/* Helles Overlay über das Bild legen */
-.stApp::after {
-    content: "";
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.6);
-    pointer-events: none;
-    z-index: 0;
-}
+        /* Heller Overlay-Effekt oben drüber */
+        [data-testid="stAppViewContainer"]::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.6);  /* Weiß mit Transparenz */
+            z-index: 0;
+            pointer-events: none;
+        }
 
-/* Inhalt sichtbar halten */
-.stApp > * {
-    position: relative;
-    z-index: 1;
-}
+        /* Inhalte über das Overlay legen */
+        .stApp {
+            position: relative;
+            z-index: 1;
+        }
 
-/* Textlesbarkeit verbessern */
-h1, h2, h3, h4, h5, p, label, .stTextInput label {
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
-}
+        /* Optional: Textschatten für bessere Lesbarkeit */
+        h1, h2, h3, h4, h5, p, label, .stTextInput label {
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.4);
+        }
 
-/* Optional: heller Inhaltsbereich */
-section.main > div {
-    background-color: rgba(255, 255, 255, 0.85);
-    padding: 2rem;
-    border-radius: 12px;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-}
-</style>
-        """,
-        unsafe_allow_html=True
-    )
+        /* Optional: Heller Container */
+        section.main > div {
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+        }
+        </style>
+    """, unsafe_allow_html=True)
+
+# Setze den Hintergrund mit Overlay
+set_background_with_overlay()
 
 
 # Titel und Einführung mit Emoji
