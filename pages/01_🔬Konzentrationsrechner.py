@@ -18,7 +18,7 @@ def set_background_from_url():
     background-position: center;
 }
 
-/* Halbtransparentes Overlay über dem Hintergrundbild */
+/* Overlay für bessere Lesbarkeit */
 .stApp::before {
     content: "";
     position: fixed;
@@ -26,22 +26,17 @@ def set_background_from_url():
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(255, 255, 255, 0.6);  /* Weißer Schleier */
-    z-index: 0;
+    background-color: rgba(255, 255, 255, 0.6);
+    z-index: -1; /* Macht das Overlay hinter dem Inhalt sichtbar */
+    pointer-events: none; /* Verhindert Scroll-/Klick-Blockierung */
 }
 
-/* App-Inhalte über das Overlay legen */
-.stApp > * {
-    position: relative;
-    z-index: 1;
-}
-
-/* Text-Schatten für bessere Lesbarkeit */
+/* Textlesbarkeit verbessern */
 h1, h2, h3, h4, h5, p, label, .stTextInput label {
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
 }
 
-/* Heller, abgerundeter Inhaltscontainer */
+/* Optional: Heller Inhaltscontainer */
 section.main > div {
     background-color: rgba(255, 255, 255, 0.85);
     padding: 2rem;
@@ -53,8 +48,6 @@ section.main > div {
         unsafe_allow_html=True
     )
 
-# Aufruf in deiner App
-set_background_from_url()
 
 # Titel und Einführung mit Emoji
 st.title("🔬 Konzentrationsrechner")
