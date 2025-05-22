@@ -91,6 +91,18 @@ if st.button("Antworten abschicken"):
         "total_answers": progress["total_answers"],
         "answers_detail": progress["answers_detail"],
     }
+
+    # Feedback basierend auf der Anzahl richtiger Antworten
+    if progress["correct_answers"] == progress["total_answers"]:
+        st.success("🎉 Perfekt! Du hast alle Fragen richtig beantwortet. Großartige Arbeit!")
+    elif progress["correct_answers"] >= progress["total_answers"] * 0.8:
+        st.info("👍 Sehr gut! Du hast die meisten Fragen richtig beantwortet. Weiter so!")
+    elif progress["correct_answers"] >= progress["total_answers"] * 0.5:
+        st.warning("🙂 Nicht schlecht! Du hast mehr als die Hälfte richtig. Übung macht den Meister!")
+    else:
+        st.error("😅 Das war wohl nicht dein Tag. Versuch es nochmal, du schaffst das!")
+
+    # Speichern der Ergebnisse in der Session State
     from utils.data_manager import DataManager
     DataManager().append_record(session_state_key='data_df', record_dict=result)
 
