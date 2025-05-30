@@ -1,7 +1,7 @@
 # **Bewertung Nutzertest**
 ## Was war gut?
 - Die App vermittelt auf den ersten Blick einen sehr modernen und ansprechenden Eindruck. Sie ist benutzerfreundlich gestaltet und spricht durch die Verwendung von Bildern und Emojis besonders eine jüngere Zielgruppe wie beispielsweise Studierende an.
-- Die Startseite bietet einen guten Überblick über die enthaltenen Funktionen, und die Seitennavigation ermöglicht einen schnellen Zugriff auf die verschiedenen Tools. Dabei behält man stets die Orientierung.
+- Die Seitennavigation bietet einen guten Überblick über die enthaltenen Funktionen und ermöglicht einen schnellen Zugriff auf die verschiedenen Tools. Dabei behält man stets die Orientierung.
 - Die Rechner funktionieren zuverlässig und sind einfach zu bedienen. Ihr Aufbau ist übersichtlich, sodass sie auch ohne viel Vorwissen genutzt werden können.
 - Die Lernfortschritts-Funktion ist sehr wertvoll, da Unsicherheiten oder Verständnisfragen direkt in der App gestellt werden können. Andere Nutzerinnen und Nutzer, die dieselbe App verwenden, können darauf antworten.
 - Der Quizbereich fördert eine aktive Auseinandersetzung mit den behandelten Themen. Der Fortschrittsbereich motiviert zur Wiederholung und macht Lernlücken sichtbar. Dadurch wird der Lernprozess transparent und überprüfbar.
