@@ -28,16 +28,15 @@ Ziel: Persönliche Daten & Fortschritt lokal speichern
 - Quiz erstellen mit 10 Beispielfragen bei welcher eine abgefragt werden
 - Speicherung von:
   - Lernverlauf (bearbeitete Aufgaben, Rechenwege)
-  - Lerntagebuch mit datierten Notizen
+  - Lernaustausch mit datierten Notizen
 - Datenablage über Switch Drive
 - Möglichkeit zur späteren Synchronisation bei Login-Funktion
 - Einfache lokale Nutzerverwaltung (z. B. Nutzername eingeben)
 
 - Zeitaufwand: 4 - 5 Stunden
 
-## **V3.0
-Ziel: Mehrere Nutzerprofile & zentraler Zugriff
+## **V3.0 randomisierte Fragen und Themenkurzauswahl beim Lernaustausch
 - Personalisierter Fortschritt & individuelles Lerntagebuch
-- Optionale Cloud-Speicherung (z. B. persönliche Drive-Ordner)
+- eine Auswahl von randomisierten Fragen beim Quiz
 
 - Zeitaufwand: 2 - 3 Stunden
