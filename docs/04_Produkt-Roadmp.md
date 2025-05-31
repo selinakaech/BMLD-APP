@@ -37,6 +37,7 @@ Ziel: Persönliche Daten & Fortschritt lokal speichern
 
 ## **V3.0 randomisierte Fragen und Themenkurzauswahl beim Lernaustausch
 - Personalisierter Fortschritt & individuelles Lerntagebuch
-- eine Auswahl von randomisierten Fragen beim Quiz
+- eine Auswahl von 30 randomisierten Fragen beim Quiz, welche sich beim lösen des Quiz jedes Mal ändern
+- Einrichten eines Themenfilters beim Lernaustausch
 
 - Zeitaufwand: 2 - 3 Stunden
