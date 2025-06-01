@@ -48,9 +48,22 @@ if data_df.empty:
     st.info('Keine Quiz-Daten vorhanden. Bitte machen Sie zuerst ein Quiz.')
     st.stop()
 
+
 # Sort dataframe by timestamp, falls vorhanden
 if 'timestamp' in data_df.columns:
     data_df = data_df.sort_values('timestamp', ascending=False)
+
+# answers_detail in JSON-konvertierbare Strings umwandeln (falls nötig)
+import ast
+def format_answers(detail):
+    try:
+        parsed = ast.literal_eval(detail) if isinstance(detail, str) else detail
+        return "\n".join([f"❓ {d['Frage']}\n📝 {d['Ihre Antwort']}\n✅ {d['Status']}" for d in parsed])
+    except Exception:
+        return str(detail)
+
+if "answers_detail" in data_df.columns:
+    data_df["answers_detail"] = data_df["answers_detail"].apply(format_answers)
 
 # Display table
 st.dataframe(data_df)
