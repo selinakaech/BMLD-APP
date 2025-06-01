@@ -3,6 +3,7 @@ from utils.login_manager import LoginManager
 LoginManager().go_to_login('Start.py') 
 # ====== End Login Block ======
 
+from utils.data_manager import DataManager
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -34,7 +35,15 @@ set_background_from_url(image_url)
 
 st.title("📈 Lernfortschritt")
 
-data_df = st.session_state['data_df']
+# Sicherstellen, dass data_df geladen ist
+if "data_df" not in st.session_state:
+    DataManager().load_user_data(
+        session_state_key="data_df",
+        file_name="data.csv",
+        initial_value=pd.DataFrame(columns=["correct_answers", "total_answers", "answers_detail", "timestamp"])
+    )
+
+data_df = st.session_state["data_df"]
 if data_df.empty:
     st.info('Keine Quiz-Daten vorhanden. Bitte machen Sie zuerst ein Quiz.')
     st.stop()
@@ -116,4 +125,4 @@ try:
         unsafe_allow_html=True
     )
 except FileNotFoundError:
-    st.sidebar.error("Das Logo wurde nicht gefunden. Überprüfe den Pfad.")
+    st.sidebar.error("Das Logo wurde nicht gefunden. Überprüfe den Pfad.")
