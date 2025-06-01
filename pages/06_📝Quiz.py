@@ -90,6 +90,7 @@ if st.button("Antworten abschicken"):
         "correct_answers": progress["correct_answers"],
         "total_answers": progress["total_answers"],
         "answers_detail": progress["answers_detail"],
+        "timestamp": pd.Timestamp.now()
     }
 
     # Feedback basierend auf der Anzahl richtiger Antworten
@@ -106,17 +107,6 @@ if st.button("Antworten abschicken"):
     from utils.data_manager import DataManager
     DataManager().append_record(session_state_key='data_df', record_dict=result)
 
-    # Session State direkt aktualisieren (Lösung)
-    # Nur einfache Werte für den Lernfortschritt speichern!
-    result_simple = {
-        "correct_answers": progress["correct_answers"],
-        "total_answers": progress["total_answers"],
-        "timestamp": pd.Timestamp.now()
-    }
-    if 'data_df' in st.session_state and not st.session_state['data_df'].empty:
-        st.session_state['data_df'] = pd.concat([st.session_state['data_df'], pd.DataFrame([result_simple])], ignore_index=True)
-    else:
-        st.session_state['data_df'] = pd.DataFrame([result_simple])
 
     st.success("Antworten gespeichert")
     st.write("Jetzt können Sie Ihre persönliche Entwicklung unter Lernfortschritt anzeigen lassen.")
@@ -158,4 +148,4 @@ try:
         unsafe_allow_html=True
     )
 except FileNotFoundError:
-    st.sidebar.error("Das Logo wurde nicht gefunden. Überprüfe den Pfad.")
+    st.sidebar.error("Das Logo wurde nicht gefunden. Überprüfe den Pfad.")
